@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style type="text/css">
+
+        li strong {
+            font-style: italic;
+            font-weight: normal;
+        }
+
+        strong {
+            color: red;
+        }
+
+        h2 {
+            color: red;
+        }
+
+        h2 strong {
+            color: blue;
+        }
+
+        .center {text-align: center}
+
+        p {text-indent: 5em;}
+    </style>
+</head>
+<body>
+
+
+<p>WWF 的目标是：<q>构建人与自然和谐共存的世界。</q></p>
+<code>
+    var person = {firstName:"Bill",
+    lastName:"Gats", age:50}
+</code>
+
+<br/>
+code 元素不保留多余的空格和折行：
+
+如需解决该问题，您必须在 pre 元素中包围代码：
+
+<code>
+<pre>
+var person = {
+    firstName:"Bill",
+    lastName:"Gates",
+    age:50,
+    eyeColor:"blue"
+}
+</pre>
+</code>
+
+<br/>
+<select name="cars">
+    <option value="volvo">Volvo</option>
+    <option value="saab">Saab</option>
+    <option value="fiat" selected>Fiat</option>
+    <option value="audi">Audi</option>
+</select>
+
+
+<br>
+
+<ol>
+    <li><strong>我是斜体字。这是因为 strong 元素位于 li 元素内。</strong></li>
+    <li>我是正常的字体。</li>
+</ol>
+
+<br>
+<p>The strongly emphasized word in this paragraph is <strong>red</strong>.</p>
+<h2>This subhead is also red.</h2>
+<h2>The strongly emphasized word in this subhead is <strong>blue</strong>.</h2>
+
+<br>
+
+
+<h1 class="center">
+    This heading will be center-aligned
+</h1>
+
+</body>
+</html>
