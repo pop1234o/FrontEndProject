@@ -631,24 +631,145 @@ wait</span><br />
 <span style="cursor:help">
 help</span>
 
+===========导航
+<ul>unordered link 无序链表
+<ol>order link 有序链表
+
+默认链表是有marker的，和边距（浏览器的默认设定）
+如果要去掉marker
+{
+list-style-type:none; 去掉marker
+margin:0;
+padding:0;
+}
+
+a默认是包裹内容的，要设置宽度，得设置block
+a
+{
+display:block;
+width:60px;
+background-color:#dddddd;
+}
+
+=======水平导航栏
+有两种创建水平导航栏的方法。使用行内或浮动列表项。
+两种方法都不错，但是如果您希望链接拥有相同的尺寸，就必须使用浮动方法。
+
+ 默认地，<li> 元素是块元素
+
+
+========图片透明
+img
+{
+opacity:0.4;
+filter:alpha(opacity=40); /* 针对 IE8 以及更早的版本 */
+}
+img:hover
+{
+opacity:1.0;
+filter:alpha(opacity=100); /* 针对 IE8 以及更早的版本 */
+}
 
 
 
 
+================
+======css3=====
+==============
+div
+{
+transform:rotate(30deg);
+}
+
+==========添加圆角
+div
+{
+text-align:center;
+border:2px solid #a1a1a1;
+padding:10px 40px; 
+background:#dddddd;
+width:350px;
+border-radius:25px; 圆角 
+-moz-border-radius:25px; /* 老的 Firefox */
+}
+
+=========CSS3 边框阴影
+div
+{
+box-shadow: 10px 10px 5px #888888;
+}
+
+========CSS3 边框图片
+div
+{
+border-image:url(border.png) 30 30 round;
+-moz-border-image:url(border.png) 30 30 round; /* 老的 Firefox */
+-webkit-border-image:url(border.png) 30 30 round; /* Safari 和 Chrome */
+-o-border-image:url(border.png) 30 30 round; /* Opera */
+}
+
+==========CSS3 背景
+以前设置图片背景只能用原始大小
+
+div
+{
+background:url(bg_flower.gif);
+-moz-background-size:40% 100%; /* 老版本的 Firefox */
+background-size:40% 100%;
+background-repeat:no-repeat;
+}
+
+background-origin 属性规定背景图片的定位区域。
+背景图片可以放置于 content-box、padding-box 或 border-box 区域。
 
 
+=========单词换行
+允许对长单词进行拆分，并换行到下一行
+p {word-wrap:break-word;}
+
+=============2d转换
+translate()
+rotate()
+scale()
+skew()
+matrix()
 
 
+=======创建动画
+注释：Internet Explorer 9，以及更早的版本，不支持 @keyframe 规则或 animation 属性。
+@keyframes myfirst
+{
+from {background: red;}
+to {background: yellow;}
+}
 
+@-moz-keyframes myfirst /* Firefox */
+{
+from {background: red;}
+to {background: yellow;}
+}
 
+@-webkit-keyframes myfirst /* Safari 和 Chrome */
+{
+from {background: red;}
+to {background: yellow;}
+}
 
+@-o-keyframes myfirst /* Opera */
+{
+from {background: red;}
+to {background: yellow;}
+}
 
+使用
 
-
-
-
-
-
+div
+{
+animation: myfirst 5s;
+-moz-animation: myfirst 5s;	/* Firefox */
+-webkit-animation: myfirst 5s;	/* Safari 和 Chrome */
+-o-animation: myfirst 5s;	/* Opera */
+}
 
 
 
