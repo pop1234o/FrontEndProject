@@ -57,7 +57,8 @@ ol li
 自定义列表（理解）
 dl dt（title） dd
 网站底部的分类
-
+dd默认是有margin-left的，默认值可以在chrome中查看
+一般适用于有title，然后有细分内容的列表
 
 表单（掌握）
 填写信息

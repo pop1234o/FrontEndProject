@@ -582,7 +582,7 @@ chrome中要看到hover的样式得
 然后下面的元素就挤上来了
 
 清除浮动：给父布局清除浮动，它的高就变为多个子布局中最大高度了
-
+其实就是清除它左/右侧所有元素浮动，把他们当成在布局中的元素
 清除浮动四种方法：
 clear:left right both(几乎只用这种)
 
@@ -637,7 +637,7 @@ clear:both;
 1.父布局没有固定高度
 2.子盒子浮动了
 3.影响到下面布局了，下面布局挤上来的，被盖住了
-推荐使用后两种方法
+推荐使用后两种方法，一般给ul或者外层div使用即可
 
 
 ##ps
@@ -747,20 +747,31 @@ a不要设置block否则上面的属性就继承到a中了，就不是包裹内�
 注意：如果一行内有多个盒子都是垂直居中，那么代码写到最外层那个即可，因为可以继承
 可以被继承：font- text line- color
 
+* a元素你要设置宽高，设置成块，必须设置 display:block;
+* 底部友情链接用自定义列表，因为有title 有内容 dl dt dd
+
 ### li的margin问题
 divbox-> divlist->ul->li
 divbox是固定宽度居中的
 我们一排5个item，如果每个li设置margin-right
 那么最后一个item就会挤到下面，因为它也有margin-right
-那么我们解决方案是给 divlist一个大一点的宽度，让他的宽度超过divbox
+那么我们解决方案是给 divlist或ul一个大一点的宽度（其实divlist宽了ul是块级元素默认父布局大小），
+让他的宽度超过divbox
 那么最后一个item就不会挤到下面去了
+
+还有一种方案是 给 ul设置一个负的margin-right:-20px;这样ul宽度也变大了
+
+
 
 也有一种解决方案是设置margin-left,然后第一个item单独设置left为0
 .video-item:first-child
 .divlist ul li:first-child{margin-left:0;}
+但是这种适合单行的
 
-
-
+###chrome调试工具
+可以看item的css样式，包括浏览器默认给的样式
+css写错了，会出现一个黄色叹号
+可以看item的边距，黄色是外边距
 
 
 
