@@ -205,6 +205,7 @@ a strong b em i del s ins u span
 一行多个
 宽高设置无效，一般是包裹内容
 行内元素只能放文本或其他行内元素
+行内元素只能设置左右内外边距，不能设置上下的·
 注意：
 a中不能放a
 a中可以放块级元素，但是要转换
@@ -738,14 +739,25 @@ li{height: 50px;line-height: 50px};
 * 有外边距合并问题，那么可以用padding-top ，子元素设置margin-top，父元素的就没有作用了，可以用padding-top
  或者父布局margin-top大于子元素就行了
 
+* li是块级元素 ，a包裹内容，然后居中
+给li中的a设置居中 
+height: 60px;
+line-height: 60px;
+a不要设置block否则上面的属性就继承到a中了，就不是包裹内容了
+注意：如果一行内有多个盒子都是垂直居中，那么代码写到最外层那个即可，因为可以继承
+可以被继承：font- text line- color
 
+### li的margin问题
+divbox-> divlist->ul->li
+divbox是固定宽度居中的
+我们一排5个item，如果每个li设置margin-right
+那么最后一个item就会挤到下面，因为它也有margin-right
+那么我们解决方案是给 divlist一个大一点的宽度，让他的宽度超过divbox
+那么最后一个item就不会挤到下面去了
 
-
-
-
-
-
-
+也有一种解决方案是设置margin-left,然后第一个item单独设置left为0
+.video-item:first-child
+.divlist ul li:first-child{margin-left:0;}
 
 
 
