@@ -75,6 +75,7 @@ em {font-style:normal}
 综合写法
 font:font-style font-weight font-size font-family
 不能更换顺序，size和family不能少
+注意：字体颜色是color
 
 体育新闻页面案例
 合理选择容器 h1 div/span p 
@@ -257,7 +258,7 @@ left 只写一个值，另一个默认居中
 尽量选最大尺寸，能照顾大部分分辨率
 然后背景都水平居中，垂直靠上对齐
 background-position:center top;
-
+x y
 ###列表指示器背景
 一般是个图片
 
@@ -413,7 +414,7 @@ padding:0;
 ###嵌套外边距（塌陷）现象
 场景：子盒子上面距离父盒子100px
 可以给父盒子一个padding-top但是父盒子高度就得算上
-padding了，
+padding了，而且所有盒子都受影响了
 
 
 如果给子盒子margin-top:100
@@ -424,7 +425,7 @@ padding了，
 1.给父亲一个透明border
 2.给父亲一个padding-top:1px
 3.overflow:hiden 
-4.用浮动来解决
+4.用浮动来解决，给子盒子一个浮动
 前两种不常用
 
 实际中优先用width。宽高剩余法来做
@@ -707,23 +708,35 @@ border-radius
 3.制作html结构
 4.用盒子模型通过div+css来布局
 
+###难点
+* input button都是行内块，他们要在一行可能有行内块的空隙
+所以我们要加浮动才能去掉空隙
+* background: #1c036c url(images/banner2.jpg) no-repeat center top; 后面顺序随意
+
+* 如果上面div中有内容溢出到下面，而且上面的内容设置了float 那么下面的文字会环绕上面的内容
+这时我们设置一个margin-top即可，或者下面的设置clear:both 来清除上面的浮动，
+
+* 如果一个div包裹一个img，那么div的高度可以要高于img，因为img是行内块，有默认的边距，而且通过css去不掉
+要设置img 是float的即可。 或者设置为block也可。
 
 
+* 文本垂直居中
+li{height: 50px;line-height: 50px};
 
+* a默认是行内元素，
+<a>aaa<<span>bbb</span></a>
+如果span设置成浮动到右侧，那么a的可点击区域就是文字区域，所以设置成block才能整个点击
 
+* 我们一般导航都是给a设置为block，然后设置宽高，然后垂直居中即可
 
+* class-hd(head) class-bd(body)命名规则
 
+* 块级元素不用给宽，一般都是父布局宽度
 
-
-
-
-
-
-
-
-
-
-
+* 没有宽度的盒子，padding不会增加宽度
+* 多行文字不能用line—height等于行高进行居中，只能给个高度，然后margin-top
+* 有外边距合并问题，那么可以用padding-top ，子元素设置margin-top，父元素的就没有作用了，可以用padding-top
+ 或者父布局margin-top大于子元素就行了
 
 
 

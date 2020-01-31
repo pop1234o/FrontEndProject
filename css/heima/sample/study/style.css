@@ -1,0 +1,175 @@
+/*默认样式*/
+* {
+    margin: 0px;
+    padding: 0px;
+}
+
+li {
+    list-style: none;
+}
+
+a {
+    text-decoration: none;
+}
+
+button {
+    border: 0;
+
+}
+
+/*版心宽度 居中*/
+.w {
+    width: 1200px;
+    margin: auto;
+}
+
+.header {
+    height: 42px;
+    background-color: pink;
+    margin-top: 30px;
+}
+
+.logo {
+    float: left;
+}
+
+.logo img {
+    /*float: left;*/
+    display: block;
+}
+
+.nav {
+    float: left;
+}
+
+.nav ul li {
+    float: left;
+    margin-left: 10px;
+
+}
+
+.nav ul li a {
+
+    display: block;
+    height: 40px;
+    line-height: 40px;
+    padding: 0 20px;
+    background-color: gray;
+}
+
+.nav ul li a:hover {
+    border-bottom: 2px solid red;
+}
+
+.search {
+    float: left;
+    margin-left: 40px;
+
+}
+
+/*这样就不需要给input添加class了 都是控制盒子里的东西*/
+.search input {
+    float: left;
+    height: 38px;
+    width: 300px;
+    padding-left: 10px;
+    border: 2px solid skyblue;
+    font-size: 20px;
+    color: #ccc;
+}
+
+.search button {
+    float: left;
+    height: 42px;
+    width: 70px;
+    background-color: blue;
+    font-size: 13px;
+    color: white;
+
+}
+
+.user {
+    float: left;
+    margin-left: 30px;
+}
+
+
+.banner {
+
+    height: 420px;
+    /*margin-top: 30px;*/
+    background: #1c036c url(images/banner2.jpg) no-repeat center top;
+}
+
+.subnav {
+    float: left;
+    width: 300px;
+    background-color: green;
+
+}
+
+.subnav ul li a {
+    display: block;
+    height: 50px;
+    line-height: 50px;
+    padding-left: 10px;
+    padding-right: 10px;
+    color: white;
+}
+
+.subnav ul li a:hover {
+    color: red;
+}
+
+
+.subnav ul li span {
+    float: right;
+
+}
+
+.course {
+    float: right;
+    width: 300px;
+    height: 320px;
+    margin-top: 50px;
+    background-color: #ff00ff;
+}
+
+.course_head {
+    height: 45px;
+    line-height: 45px;
+    background-color: skyblue;
+    text-align: center;
+}
+
+.course ul{
+	padding-top: 5px;
+}
+
+.course ul li {
+    height: 50px;
+    margin: 10px 20px 0px 20px;
+
+    color: white;
+
+    border-bottom: 2px dotted gray;
+}
+
+.course a {
+    display: block;
+    width: 200px;
+    height: 40px;
+    line-height: 40px;
+    margin: 20px auto;
+    background-color: #fff;
+    font-size: 13px;
+    text-align: center;
+    color: skyblue;
+    border: 2px solid skyblue;
+    border-radius: 20px;
+}
+
+.course a:hover{
+    background-color: skyblue;
+    color: white;
+}
