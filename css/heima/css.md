@@ -890,37 +890,83 @@ a:hover .mask{
 	display:block;
 }
 
+##css用户界面样式
+###鼠标样式
+li {
+   cursor:
+   defalut;默认 
+   pointer-小手  轮播图的指示器 有点击效果的盒子
+   move-一个十字 购物网站图片放大镜
+   text-光标
+   not-allowed 购物车减少商品，最少买一个，再少就禁止点击 
+}
+
+###轮廓线 - 平时都是要去掉的
+注意不是border
+input或文本域 鼠标一点击，就有一个蓝色边框线
+用于表单，取消轮廓线
+outline:none或者0 放到通用样式中
 
 
+###防止拖拽文本域
+textarea{
+	resize:none;
+}
+拖拽会改变布局
 
+###垂直居中
+水平居中：
+块元素水平居中对齐 margin:0 auto
+文字居中： text-align:center
+垂直居中：
+文字：line-height == height
+块：绝对定位 top:50% margin-top:-自身高度一般
+  或者直接加个合适的padding-top
 
+vertical-aligin 只针对行内元素或者行内块 
+针对文字四条线
+middle baseline top bottom 
 
+比如：图片和文字在一行内，（默认是baseline）
+改变图片和文字的对齐方式，给外层div加属性，作用在一行内的元素
 
+还可以去除图片底部空隙。因为图片默认是基线对齐，所以底部默认留有一些空隙
+可以改成float: left;，也可以用vertical-align:bottom
+改成display:inline-block还是有空隙 或者display:block也行
 
+可以写成通用属性
+img{vertical-align:top,border:0}
 
-
-
-
-
-
-
-
-
-
+###溢出的文字省略号显示
+chrome可以直接修改html文案
+1.white-space:nowrap 一行内显示，超出也显示 默认是normal超出的折行
+2.overflow:hidden 超出的隐藏
+3.text-overflow:ellipsis 省略号  默认是clip裁剪
  
+##css精灵技术 sprite  （重点）
+###为什么要精灵技术
+很多小图片，一个一个请求次数太多，慢
+干脆把小图片合并到一张图上，这样只请求一次，提高加载速度
 
+把合并后的那个图叫精灵图
 
+主要用于按钮背景，文字icon等背景
+也可以是26个英文字母的精灵图，就可以实现自定义的英文文案
+###如何使用
+background:url(精灵图) no-repeat x y
+background-position:x y 定位到精灵图位置就行，注意是负值
 
+###滑动门技术
+类似Android .9图，背景自适应文案
+a->span即可
+a设置左门背景，span设置右门
+a要是inline-block，因为需要宽度
 
+案例：微信下载页的顶部按钮背景 https://weixin.qq.com/
 
-
-
-
-
-
-
-
-
+注意：
+* li都浮动，外面的ul，div都会高度为0，要clearfix清楚浮动才行
+* 这里要直接给a设置color，否则继承下来的权重为0，a浏览器有默认样式
 
 
 

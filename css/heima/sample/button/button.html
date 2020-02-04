@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>button样式</title>
+    <style type="text/css">
+    * {
+        margin: 0px;
+        padding: 0px;
+    }
+
+    li {
+        list-style: none;
+    }
+
+    a {
+        text-decoration: none;
+    }
+
+    button {
+        border: 0;
+
+    }
+
+    .clearfix:before,
+    .clearfix:after {
+        content: "";
+        display: table;
+    }
+
+    .clearfix:after {
+        clear: both;
+    }
+
+    .clearfix {
+        *zomm: 1;
+        /*ie6,7专门清除浮动样式的*/
+    }
+
+    /*===========样式==============*/
+
+    /*微信导航样式*/
+    .box1 {
+        /*background-color: black;*/
+        height: 75px;
+
+        background: url(images/wx_bg.jpg) repeat-x;
+    }
+
+    .box1 ul {
+        padding-top: 21px;
+    }
+
+    .box1 ul li {
+        float: left;
+
+
+    }
+
+    .box1 ul li a {
+        display: block;
+        height: 33px;
+        /*这里要直接给a设置color，否则继承下来的权重为0，a浏览器有默认样式*/
+        font-size: 14px;
+        color: white;
+        line-height: 33px;
+
+        padding-left: 15px;
+    }
+
+    .box1 a span {
+        display: block;
+        height: 33px;
+        padding-right: 15px;
+
+    }
+
+    .box1 a:hover {
+        background: url(images/bg_btn_black.png) no-repeat;
+    }
+
+    .box1 a:hover span {
+        background: url(images/bg_btn_black.png) no-repeat right;
+
+    }
+    </style>
+</head>
+
+<body>
+    <div class="box1 clearfix">
+        <ul>
+            <li><a href="" title=""><span>首页</span></a></li>
+            <li><a href="" title=""><span>公众平台</span></a></li>
+            <li><a href="" title=""><span>帮助与反馈</span></a></li>
+            <li><a href="" title=""><span>表情开放平台</span></a></li>
+        </ul>
+    </div>
+</body>
+
+</html>
