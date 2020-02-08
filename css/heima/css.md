@@ -426,7 +426,7 @@ padding:0;
 解决方案：
 1.给父亲一个透明border
 2.给父亲一个padding-top:1px
-3.overflow:hiden 
+3.overflow:hiden 给父元素设置
 4.用浮动来解决，给子或父盒子一个浮动
 或者父或子盒子有绝对定位（或者固定定位）那么也不会出现这个问题
 前两种不常用
