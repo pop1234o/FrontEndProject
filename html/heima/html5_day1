@@ -1,0 +1,95 @@
+===========day1===========
+vscode 免费开源 自带emment
+###插件
+chinese汉化
+open in browser 
+js-css-html formatter 保存自动格式化
+auto rename tag 重命名配对的标签
+css peek 追踪样式
+
+
+#html5
+以前学的是xhtml，h5是xhtml拓展
+
+###新增 语义化标签
+语义化标签：一看标签命名就知道干啥的
+以前都是div实现，搜索引擎不好理解
+<header>
+<nav>
+<article>
+<section> 块级标签就是个div
+<aside>
+<footer>
+
+* 主要针对搜索引擎的
+* 可多次使用
+* ie9要转换为块级标签，ie9默认为行内元素
+* 主要移动端用，pc端主要有旧版本ie兼容问题
+
+###多媒体标签
+再也不用flash了
+<audio>
+ogg mp3 wav
+不同浏览器支持不一样
+可以放两种格式
+
+<audio src=""/>
+controls=“controls” 显示播放条
+不能风格统一
+autoplay 自动播放
+谷歌禁用了
+loop
+
+#### audio兼容
+<audio> 
+<source src="xx.mp3" type="audio/mpeg">
+<source src="xx.ogg" type="audio/ogg">
+不支持
+</audio> 
+
+### 视频标签
+video
+mp4 ogg webm
+属性同上
+可以给宽高
+兼容同上
+
+谷歌自动播放禁用了自动播放
+解决方案，给视频加静音
+* poster播放前的图片
+
+
+##h5表单
+加了很多input type类型
+比如：
+type="email" 浏览器就会自动校验了
+url
+date
+time
++number
++tel
++search 自动有小叉号
+color
+
+上面主要用在移动端
+
+### 新增表单属性
++require=“” 这个input必须填写才能提交
++placeholder="" 自动占位
+autofocus 自动获取光标，默认input是没焦点的
+autocomplelete="off/on" 需要name属性，是根据name来保存的
++multiple
+
+
+
+
+
+
+
+
+
+
+
+
+
+
