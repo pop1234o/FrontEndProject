@@ -198,7 +198,8 @@ span <b>和<i>
 ===========注册页面=========
 之前用table，现在可以用ul+li 里面用label+input
 
-
+* 用label em i span s del 做行内不一样的东西
+* icon都用背景实现
 
 ============总结：
 0.根据ui来确定布局
@@ -209,6 +210,7 @@ span <b>和<i>
 轮播图，轮播略缩图
 footer实现
 tab栏切换：ul+li做tab，下面div 显示隐藏
+icon+文字布局：span 里em变成行内块，后面接文字
 
 1.1 了解块，行内块，行内元素的特性
 
@@ -216,6 +218,8 @@ tab栏切换：ul+li做tab，下面div 显示隐藏
 3.各种（文字，盒子）水平居中垂直居中
 文字垂直居中：line-height == height
 文字水平居中: text-align:center
+
+行内块垂直居中：vertical-align:middle
 
 4.浮动引起的问题解决
 5.显示隐藏
