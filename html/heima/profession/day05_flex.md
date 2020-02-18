@@ -118,12 +118,74 @@ max-width min-width
 然后盒子居中
 
 案例：m.jd.com
+里面item宽度 20%
+
+### 案例：京东首页
+TODO
+
+====================
+========day02=======
+====================
+## flex 布局
+简单快速，但是pc端比如ie支持差
+父盒子用
+display:flex;
+子盒子就有宽高了
+
+justify-content:space-around 平均分
+
+子盒子 flex:1 宽度权重
+
+### 布局原理
+flexible 弹性布局 伸缩布局
+任何一种盒子都能使用
+父元素设置后，float，clear，vertical-align失效
+
+把父元素设置为flex，从而控制 子元素就是flex item
+
+### 父元素属性
+flex-direction: 设置主轴
+row 横向-默认 x主轴，y侧轴
+row-reverse 横向反向 不重要
+column -纵向
 
 
+justify-content: 设置主轴的对齐方式
+flex-start 左对齐 默认
+flex-end 右对齐
+center 居中对齐
+space-around 平分剩余空间
+space-between 两边贴边，平分剩余空间
 
+flex-warp:是否换行
+nowarp 不换行，装不开平分宽度，默认
+warp
 
+align-items 单行 侧轴对齐方式
+flex-start
+flex-end
+center
+stretch 拉伸 ，item不要给高度，高度拉伸到父布局
+只适合单行中使用
 
+align-content：多行 侧轴对齐方式
+flex-start
+flex-end
+center
+space-around 平分剩余空间 -
+space-between
+stretch 拉伸 
+单行无效
 
+flex-flow: row wrap 复合写法
+
+### 子项属性
+flex:子盒子占剩余空间的多少份 默认0
+比如左侧固定宽度，右侧宽度固定，中间自适应
+
+align-self 设置当前子盒子在侧抽的对齐方式
+order 默认0 子盒子在布局中的顺序
+-1表示在前面
 
 
 
