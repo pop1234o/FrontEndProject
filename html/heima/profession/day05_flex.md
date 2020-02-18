@@ -187,6 +187,183 @@ align-self 设置当前子盒子在侧抽的对齐方式
 order 默认0 子盒子在布局中的顺序
 -1表示在前面
 
+======================
+==========day03======
+=======================
+## rem布局 （重要） 苏宁
+布局文字随着屏幕变化
+流式布局和flex布局主要针对宽度，高度不行
+如何实现宽高等比缩放
+rem能解决
+
+### rem
+root em em是相对于父元素字体大小
+1em = 父元素的字体大小
+
+rem是相对于html元素的字体大小
+
+em ：父元素可能有多个
+rem: 只有一个html
+
+### 媒体查询
+Media Query css3语法
+针对不同的屏幕尺寸来设置不同的样式
+
+声明：
+@media mediatype and|not|only (media feature){
+
+}
+mediatype
+all
+print 打印机
+screen 手机 平板
+
+and是左右两个条件的连接
+
+案例：根据页面宽度来设置背景色
+小于500px的样式
+@media screen and (min-width:500px){
+    body{
+
+    }
+}
+
+最大宽度800px(小于等于800px)的设备上
+@media screen and (min-width:800px){
+    body{
+
+    }
+}
+
+
+@media screen and (min-width:500px) and (max-width:800px)
+
+### 实现动态变化
+可以用 min-width 从小到大的格式
+
+### 引入资源 了解
+大屏用大屏css，小屏用小屏css
+
+<link rel="stylesheet" 
+media="mediatype and|not|only (media featrue)"
+href="xxx.css"
+>
+建议：从小到大，下面的符合会覆盖上面的样式
+示例：大屏一行一个div，小屏用浮动，一行一个
+
+## less
+css没逻辑，冗余高
+不利于复用
+css没计算能力，rem还得算，css也没有除法
+
+Leaner style sheets，css扩展语言，css预处理器
+css动态性特性
+
+less其实就是一个自定义的语言，然后用处理器处理成css
+### less安装
+先安装node.js
+node -v 安装成功
+npm install -g less
+lessc -v 安装成功
+
+### less使用
+新建 .less文件
+
+### less变量
+@变量名:值
+不能数字开头，大小写敏感
+@color:ping;
+body{
+    background-color:@color;
+}
+div{
+    background-color:@color;
+}
+优点：改一处，其他都改了
+
+### less编译
+转换成css
+vscode中有个 easyless插件
+然后保存一下，就自动生成一个css
+
+### less嵌套
+.header{
+    xxx
+    a { //给.header里的a标签设置样式，不用平行写了
+
+    }
+}
+优势：这样结构清晰，css平行的根本不好看嵌套关系
+
+嵌套伪元素
+a{
+    &:hover{} //加& 表示和父级平行
+}
+
+less注释是 // 
+
+### less运算
+任何数字，颜色，变量都能运算 
+@border:5px + 5;
+div{
+    width:200px * 2;
+    height:82rem / 50px;
+    color:#666-#222；
+}
+
+* 运算符左右都要有空格
+* 两个单位不同，单位以第一个为准
+
+## rem适配方案
+目标：屏幕不同，ui等比缩放，而不是跳着变
+技术方案1：less+媒体查询+rem
+技术方案2：flexible.js +rem (推荐，因为简单)
+flexible.js 淘宝出的
+
+其实我们把750px设计稿划分成10等分，
+75px/1份
+设计稿有个100px的盒子，那么它就是100px/(75px/1份)
+得出这个盒子占多少份，那么我们就根据这个来设置宽高即可
+
+### 技术方案1：less+媒体查询+rem
+常见ui设计图
+iphone:750px
+android:720px ,1080px
+
+假如是 750px
+宽度份15份（携程） 或者10份（淘宝）
+那么（你要适配哪些尺寸就写上）
+@media screen and (min-width:320px){
+    html{
+        //320/15
+        font-size:23.22px;
+    }
+}
+@media screen and (min-width:750px){
+    html{
+        font-size:50px;
+    }
+}
+页面元素rem值=页面元素在750px下的尺寸/(width/15份)
+
+### less引入less
+@import "common.less"
+
+
+## 技术方案2：flexible.js +rem (推荐，因为简单)
+github.com/amfe/lib-flexible
+用js来给你算出来 html的font-size
+里面划分成10份，
+ui给你750的设计图，那么1份就是75px
+所以根据750ui中的元素的px除以75就得出x rem
+
+### vscode px转rem插件 - cssrem
+你就不用一个个算了
+默认是 html 大小 1rem=16px
+需要改一下
+
+
+
 
 
 
