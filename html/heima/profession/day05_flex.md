@@ -362,18 +362,94 @@ ui给你750的设计图，那么1份就是75px
 默认是 html 大小 1rem=16px
 需要改一下
 
+====================
+========day04=======
+====================
+## bootstrap
+响应式，一个页面随着屏幕变化变换页面结构
 
+### 原理
+通过媒体查询来选择不同的布局
+<768px 超小屏幕(手机) 手机屏幕/2 比如iphonex就是 375px
+768px-992px pad
+992-1200 pc
+1200以上宽屏pc
 
+### 布局容器
+分几段，一般设置成比最小的还小一点
+<768px 就设置宽度100%
+768px-992px 设置为750px
+992-1200 pc 设置宽度为 950px
 
+### 案例 响应式导航栏
+宽屏一行，小屏多行
+宽屏的时候每个li设置为 固定宽度，正好一排
+小屏设置li宽度 33% 一行显示三个
 
+如果小屏也为一行，那么就会显示不全，因为宽度固定
 
+### 快速开发
+bootstrap  来自twitter
+基于html css js
+bottstrap.css88.com(非官方)
+里面有很多现成的样式，而且是响应式的
+最稳定 3.x.x版本
 
+## bootstrap使用
+1.创建文件夹结构
+创建bootstrap文件夹
+下载bootstrap，放到这里
+2.创建html骨架
+使用ie最高版内核本来渲染内容
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+条件注释
+<!--[if lt IE 7]>
+<![endif]-->
+复制 bootstrap中的条件注释，加入，兼容低版本ie h5 和css3
+3.引入css
+4.开始书写
 
+### bootstrap布局容器
+预定义了 .container 这里用的也是媒体查询
+不同屏幕，.container宽度不同
 
+### 栅格系统
+grid systems
+把容器分为12列，有点像rem，rem是整个屏幕划分
+现有行，再有列
+先定义行 class="row"
+在定义列
+class="col-lg-3" 设置盒子占列的几份 ，一共12份
+小于12份则不沾满整个屏幕
+大于12则换行显示
 
+示例：
+class="col-lg-3 col-md-4 col-sm-6 col-xs-12"
+lg-large
+md-medium
+sm-small
+xs- extra small超小
 
+### 嵌套
+里面嵌套的也加上 col就行
+或者在加一个 row的div也行，就没有父元素的padding了
 
+### 列偏移
+左右布局
+.col-md-offset-4 右偏移4份
+居中布局
+也是偏移多少份
 
+### 列排序
+.col-md-push- 右推4份
+.col-md-pull- 左拉4份
+会覆盖
+### 响应式工具
+.hidden-xs 超小屏上隐藏
+.visible-xs 只有大屏上显示
+### 阿里百秀案例
+写之前先分盒子
+TODO
 
 
 
