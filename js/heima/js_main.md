@@ -227,23 +227,215 @@ arguments是个伪数组
 ### 函数调用
 函数调用可以在定义之前。
 
+=====================
+======day06作用域=====
+=====================
+名字(变量)的可用范围
+作用：减少冲突，提高稳定
+
+### js作用域 - es6前
+1.全局作用域-整个script标签或者单独的一个js文件
+2.局部作用域（函数作用域），函数内有效
+
+### 变量作用域
+全局作用域下的变量-全局变量
+
+特殊情况：
+函数内没有声明，直接声明，就属于全局变量
+function fun(){
+    num  =2;
+}
+console.log(num);//2
+
+全局变量只有浏览器关闭时销毁，局部变量函数执行完后就销毁
+
+### 块级作用域
+js没有块级作用域（es6新增）
+if(1){
+    var num = 3;
+}
+console.log(num);//3
+
+### 作用域链
+函数中也可以定义函数
+内部函数可以访问外部函数，
+
+内部函数访问外部函数的变量，采用链式查找
+
+var num =1;
+fun1();
+function fun1(){
+    var num =2;
+    fun2();
+    function fun2(){
+        console.log(num);//2
+    }
+}
+
+### js预解析
+js代码引擎执行步骤：预解析=》执行
+js会把所有 var和function定义提升到最前面
+
+1.变量提升（预解析）
+把所有变量声明提升到当前作用域最前面，只提升声明，不提升赋值
+2.函数提升
+把所有函数声明提升到当前作用域的最前面
+示例：
+console.log(num);//会报错
+
+console.log(num);//undefined ，预解析把定义提升到最前面
+var num = 2;
+
+fun();
+var fun = function(){} //会报错，因为只提升了定义，它知道是函数
+
+案例：
+var num = 10;
+fun();
+function fun(){
+    console.log(num);//输入undefined，因为函数中的声明会提升到函数最前面
+    var num= 20;
+}
+
+## js对象
+具体的事物。 明星不是对象，周星驰是对象
+js对象，无序的属性和相关方法的集合
+属性：名词
+方法：动词
+
+### 创建对象三种方式
+1.字面量
+var obj = {};//创建了一个空对象
+var obj = {
+    name:'xxx',
+    age:18,
+    sayHi:function(){//匿名函数
+
+    }
+};
+
+2.new Object
+var obj = new Object();//空对象
+obj.name = 'xxx';//属性追加
+obj.sayHi= function(){};
+
+利用= 来添加属性和方法
 
 
+3.构造函数创建
+我们前面两种方式，一次只能创建一个特定对象
+构造函数相当于定义类
+构造函数：把相同的属性和函数，封装到一个函数中
 
+function 构造函数名(){
+    this.属性 = 值;
+    this.方法 = function(){}
+}
+new 构造函数名();
 
+function Star(name ,age){
+    this.name = name;
+    this.age = age;
+}
 
+var star1 = new Star('aaa',19);
+var star2 = new Star('bbb',19);
+首字母大写
 
+构造函数指类，而new出来的是类的具体对象，对象的实例化
 
+### 调用属性的两种方法
+var a = obj.name;
+var b = obj['name'];
+### 函数调用
+obj.sayHi();
+### 变量，属性，函数，方法
+变量单独存在，属性依附于对象
+函数单独声明和调用，方法依附于对象
 
+### new关键字执行过程
+1.new创建一个空对象
+2.构造函数里的this都指向刚才创建的空对象
+3.执行构造函数中的代码，给空对象添加属性和方法
+4.构造函数返回这个对象（不需要return）
 
+### 遍历对象属性
+for(变量 in 对象){}
+for(var k in obj){
+    //k是属性名，字符串类型
+    console.log(k);
+    //属性值，函数也能输出
+    console.log(ojb[k]);
+}
 
+## js内置对象
+js对象分为3种：自定义对象，内置对象，浏览器对象·
 
+内置对象：js自带的对象，帮助我们快速开发
 
+### 查文档查看内置对象
+MDN 、W3C
+developer.mozilla.org/zh-CN
+搜索函数名即可,也可以搜索中文：最大值
+带[] 的参数代表可以有也可以没有
 
+### Math内置对象
+不是构造函数，不需要new，是静态的，直接使用
+Math.round(1.5)// 2
+Math.round(-1.5) //-1
+Math.random();[0,1) 包含0 ，不包含1
+示例：两个数之间的随机整数，官网上有示例
 
+### Date
+是构造函数，必须有new
+var date = new Date();//系统当前时间
+var date = new Date('2020-02-24 8:8:8')//指定时间
+（月份从0开始，到11）
+格式化： 
+date.getFullYear();
+date.getMonth();
+date.getDate();//几号
+date.getDay();//星期几 ，0-周日 6周六
 
+获取毫秒： 时间戳
+1970-1-1 早8：00：00
+date.valueOf();
+date.getTime();
+简单写法
+var date = +new Date();//返回毫秒数-最常用
+h5新增
+var date = Date.now();
 
+### 倒计时案例
+将来时间-现在时间 = 相隔时间-毫秒
+毫秒格式化，自己算
 
+### Array 数组对象
+var arr = new Array(2);//长度2
+var arr = new Array(2,3);//[2,3]
 
+arr instanceof Array //是否是数组对象
+Array.isArray(arr);//h5新增，ie9以上支持
+
+添加数组元素
+var length = arr.push(1,2);//数组末尾
+var length = arr.unshift(1,2);//数组前面
+
+删除数组元素
+var last = arr.pop();//数组末尾，返回删除元素
+var first = arr.shift();//删除数组第一个元素
+
+排序
+arr.reverse();//反转数组
+arr.soft();//按Unicode首位升序排序，包括数字
+//真正的排序
+arr.soft(function(a,b){
+    return a-b;//升序
+});
+
+索引
+arr.indexOf('e');//只返回第一个，没有-1
+arr.lastIndexOf('e');
+60
 
 

@@ -17,13 +17,18 @@
         <script src="js/vendor/modernizr-2.6.2.min.js"></script>
         <script>
             
-         
-            function func1(){
-                console.log('调用了func1');
-                
-            }
+            fun1();
+            var num =1;
+function fun1(){
+    var num =2;
+    fun2();
+    function fun2(){
+        console.log(num);//2
+    }
+    
+}
 
-            func1();
+
 
         </script>
     </head>
