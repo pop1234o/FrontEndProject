@@ -436,6 +436,74 @@ arr.soft(function(a,b){
 索引
 arr.indexOf('e');//只返回第一个，没有-1
 arr.lastIndexOf('e');
-60
+
+#### 数组去重-重点
+遍历数组，把元素放入新数组，新数组中有的不存储
+
+#### 数组中转换为字符串
+arr.toString(); //'1,2,3'
+arr.join('|');//'1|2|3'
+
+#### 数组元素删除
+var arr = arr.splice(第几个开始，删除的个数);
+
+### String对象
+基本包装类型
+var str = 'xxx';//把简单的字符串包装成String类型
+等于 
+var temp = new String('xxx');
+var str = temp;
+temp = null;
+
+Number 和 Boolean 都是包装类型
+我们就可以使用属性了。
+
+#### 字符串不可变
+所以不要for中字符串中进行拼接
+
+#### 字符串方法
+所有方法都不会改变原有字符串，都返回一个新的对象
+indexOf('a',起始位置);
+charAt(index);
+charCodeAt(index);//返回ascii编码，h5新增
+str[index]; //h5
+#### ascii编码
+字符和10进制编码对应
+
+#### string操作方法
+var s = str.concat('a','b');//拼接，用+也可以
+str.substr(start,length);//截取
+replace();
+split
+可以看文档，也可以用vs的智能提示。
+
+## 简单数据类型和复杂数据类型
+简单数据类型：存储的变量就是值本身
+string number boolean undefined null
+type null //object  设计缺陷
+
+复杂数据类型：new出来的，Object String
+
+栈：操作系统自动分配释放，函数的参数，局部变量，
+堆：存放对象，程序员负责释放，或者gc负责
+
+js本身没有堆栈概念？？？
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
