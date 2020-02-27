@@ -529,38 +529,110 @@ var timer2 = window.setTimeout(’func()‘,delayMs);//不提倡这种写法
 window.clearTimeout(timer1);
 
 setInterval(function(){},间隔时间);//从第1s开始调用？
-
+window.clearInterval(timer);
 案例：倒计时，轮播图
 
 倒计时：
 setInterval + innerHTML
 我们可以先调用一次函数防止第一次有空白
 
+倒计时发送短信：
+倒计时到0清除定时器
 
 
+### this指向
+指向调用函数的对象，如果是全局函数，那么就是window调用的
+
+如果是构造函数，this指向构造函数的实例
+
+btn.onclick //this指向 btn
+btn.addEventListener 也是 btn
+
+## js执行队列
+js是单线程的。
+h5提出了 web worker标准
+允许js创建多个线程，于是js出现了同步和异步
+setTimeout(func,0); 
+
+同步任务，
+
+异步任务
+click resize
+load error
+setInterval setTimeout 
+把回调函数放到消息队列
+
+点击事件，点击后，把任务放入异步队列中，
+同步任务执行完后，执行点击事件
+
+### 执行顺序
+先执行主线程中的同步任务，如果遇到回调，加入任务队列中
+同步任务结束后，再找异步任务中的任务，在同步任务后执行
+
+和Android中的handler一样
+
+## location对象
+window.location
+提供获取 设置url，
+
+url ：protocol://host[:port]/path[?query]#fragment
+port默认80
+
+location.href = '' 整个url
+location.host
+location.search //就是query
 
 
+### chrome调试
+在console中直接能执行js代码
+### 跳转链接
+location.href = ''
 
+### 案例：5秒后自动跳转
+setTimeout + location.href
 
+var time = 10;
+setInterval(function(){
+    if(time == 0){
+        log('时间到');
+        clearInterval();
+        return;
+    }
+    time--;
+},1000);
 
+### 案例：不同页面间传递数据
+可以用 location.href='xxx'+query;
+或者用表单跳转
+第二个页面 用 location.search获取
+然后去掉第一个? ，用&分隔，然后用=分隔
 
+### 重定向
+location.assign('http://xxx.com');//和href差不多
+location.replace('http://xxx.com');//替换当前页面，不记录历史，不能后退
+location.reload();//重新加载当前页面
 
+location.reload(true);//强制刷新,不用缓存，所有数据重新请求
+ctrl+f5
 
+## navigator对象
+获取浏览器信息，最常用的是userAgent
+navigator.userAgent
 
+### 案例：根据设备不同跳转h5页面
+服务端根据 客户端发送的user-agent请求头判断设备
+pc的返回pc网页，手机跳转到h5页面
 
+### h5判断设备 - 了解
+navigator.userAgent.match(/phonexxxx);
+ window.location.href='../h5.html'
+一般是服务端做的
 
-
-
-
-
-
-
-
-
-
-
-
-
+## history 对象
+history.back();
+history.forward();
+history.go(1);//前进1页面
+history.go(-1);//后退1页面
 
 
 
