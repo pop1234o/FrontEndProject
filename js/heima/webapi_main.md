@@ -634,6 +634,216 @@ history.forward();
 history.go(1);//前进1页面
 history.go(-1);//后退1页面
 
+================
+======day05=====
+================
+# 网页特效
+js动态获取和设置元素的位置
+## offset 
+### 获取元素相对位置
+获取元素相对父元素位置（父元素要有定位）
+如果父元素没有定位，就以body为准
+div.offsetTop;
+div.offsetLeft;
+
+### 获取元素宽高
+包括padding,border
+div.offsetWidth;
+div.offsetHeight;
+
+
+### 获取元素有定位的父元素
+没有就返回body
+div.offsetParent;
+
+### offset和style区别
+1.style只能获取 行内样式
+div.style.width
+offset都能获取·
+
+2.offset返回的没有单位的数值
+style是带单位的字符串
+
+3.offset包含padding border
+style不包含
+
+4.offset是只读
+style才能改变盒子大小
+
+5.使用场景：
+offset用来获取元素大小和位置，只读
+style用来设置。只能读取行内样式
+
+### 案例：得到鼠标在盒子内的坐标
+获取鼠标在屏幕中的坐标，减去盒子的坐标偏移
+
+### 案例：模态框（div）拖拽
+鼠标 mousedown mousemove mouseup
+down的时候开始监听move，然后根据鼠标坐标和鼠标在盒子内的坐标
+动态变化盒子的left和top
+
+### 仿京东放大镜效果
+
+## client系列
+返回元素边框大小和元素大小
+div.clientTop上边框大小
+div.clientWidth;不包含边框,包含padding
+
+### flexible.js源码分析
+1.根据物理像素比，设置body文字大小
+2.pageshow 和 load事件
+a链接 刷新，前进和后退 触发 load事件
+但是火狐中，原来页面会缓存，不会触发load事件
+所以要用 pageshow兼容火狐
+3.有些手机端浏览器不支持 0.5px ，这里面也做了兼容
+
+
+
+#### 立即实行函数
+js中用()包裹起来的函数，是立即执行函数
+不需要函数调用，立即执行
+可以传递参数 
+写法：
+(function(a,b){
+    //xxx
+})(1,2);
+
+(function(){
+    xxx
+}());
+
+
+好处：最大的作用就是创建了一个独立的作用域
+函数执行完就释放了。所以不会产生命名冲突
+这种写法多用在第三方库，避免命名冲突
+
+#### dpr 物理像素比
+物理像素比，在pc端是1
+移动端可能是 2 
+var dpr =  window.devicePixelRatio||1;
+
+## scroll系列
+设置获取元素滚动的位置
+
+div.scrollTop;//向上滚动的距离 如果设置scroll:auto超出内容就可以滚动
+div.scrollLeft;//
+div.scrollWidth;//不含边框 ，包含超出边框内容的高度
+
+### onscroll事件
+滚动条滚动会触发
+div.addEventListener('scroll',function(){
+    div.scrollTop;
+})
+
+### 案例：仿淘宝右侧滚动侧边栏
+原来盒子是绝对定位
+当滚动到banner，变成固定定位，一直在页面右侧
+
+document.addEventListener('scroll',function(){
+    window.pageYOffset;//window的y坐标滚动距离
+    如果和head高度一样（banner的offsetTop也行），那么侧边栏变成固定定位
+    slidebar.style.position='fixed';
+});
+
+#### window.pageYOffset兼容问题
+window.pageYOffset ie9开始支持
+
+
+总结：
+offsetWidth:包含padding，边框
+clientWidth:包含padding，不包含边框
+scrollWidth:自身宽度（好像包含padding？），不含边框
+返回的是实际内容高度，包括溢出或者滚动的部分。
+
+offset用于获取元素的位置：offsetLeft offsetTop
+client用于获取元素的大小 clientWidth ,ClientHeight
+scroll用于获取滚动的距离，scrollTop,scrollLeft
+
+页面的滚动具体 通过pageXOffset获取
+
+
+### mouseenter 和 mouseover 区别
+mouseover经过自身和自身的子盒子都会触发一遍
+
+mouseenter 只值经过自身会触发
+mouseenter没有事件冒泡
+
+
+## 动画函数封装
+通过定时器不断移动盒子位置 setInterval
+div要加定位才行，因为是不断改变div.style.left;
+停止动画就是停止定时器
+
+问题
+每个动画都创建一个 setInterval，不好和对象关联
+obj.timer = setInterval
+
+================
+======day06=====
+================
+## 动画函数封装
+添加回调函数
+把回调函数加到形参上
+if(callback){
+    callback();
+}
+
+### 案例：经过盒子，另一个盒子滑动出来
+用到滑动动画
+我感觉用css hover+css3的动画也行
+
+### 案例：网页轮播图案例
+滚动：用到上面的动画
+用ul+li布局,浮动，可以把ul宽度设置很大
+（但是ul外面div是有宽度的） 父亲overflow:hiden隐藏超出的
+小圆圈也用ul+li，根据图片数量加li
+动画是ul来做平移动画
+循环播放：
+
+### 案例：节流阀
+点击右侧按钮，等轮播图静止的时候才能点击下一张
+
+### 案例：返回顶部
+把窗口滚动到指定位置
+window.scroll(x,y)//不加px
+没有过度效果，我们可以用自己封装的动画
+可以用window.pageYOffset
+
+### 案例：点击tab指示器滑动效果
+
+
+## 移动端网页特效
+
+### 触碰事件
+和鼠标事件差不多
+touchstart
+touchmove
+touchend 
+给盒子加
+
+TouchEvent
+event.touches 所有触摸屏幕手指的集合
+event.targetTouches 触摸当前dom的手指集合
+event.changedTouches 手指状态改变
+当我们手指离开屏幕 ，只有changedTouches对象
+
+实现一个可拖动的div
+
+### 案例：移动端轮播图
+监听 touchstart，touchmove，touchend 就行
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
