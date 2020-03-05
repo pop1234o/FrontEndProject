@@ -832,16 +832,114 @@ event.changedTouches 手指状态改变
 ### 案例：移动端轮播图
 监听 touchstart，touchmove，touchend 就行
 
+================
+======day07=====
+================
+
+### 案例：移动端轮播图
+ul+li布局
+还是div指定宽度，ul撑满父布局，然后li浮动
+ul做滚动动画就行 
+ul.style.transition = 'all .3s';
+ul.style.transform = 'translateX(100px)';
+
+### 案例：移动端返回顶部模块
 
 
+### 移动端click300ms延时
+因为有双击缩放页面的手指，所以防止误触发click，所以就延时300ms
+三种解决方案：
+1.禁止缩放
+<meta name="viewport" content='user-scalable=no' />
+2.利用touch事件自己封装
+
+3.利用fastclick插件
+github.com/ftlabs/fastclick
+
+### js插件
+js插件就是有指定功能的js文件
+
+//有这个事件
+if('addEventListener' in document);
+
+把文档代码复制过来，加到html中，div的click就不会延时了
+### 加分号
+防止别人的立即执行函数没有分号，所以自己的最前面加上一个
+;(function(){})();
+
+### swiper插件
+www.swiper.com.cn
+触摸滑动插件，里面有demo
+实现手机和pc的大部分滑动功能，焦点图，tab，触摸导航
+要引入css js，不要改类名
+把demo里的css也复制过来，你可以修改自定义
+里面的js复制过来，window.onload后调用
+
+### 常见其他插件
+superslide: www.superslide2.com
+有pc和移动版的，效果看demo
+iscroll: github.com/cubiq/iscroll
+
+### 视频插件
+zy.media.js
+解决各个浏览器样式不统一问题
+video 控制条原生的都不一样，如果自己写太麻烦，可以用这个
+
+### 移动端常用开发框架
+框架：一套完整的解决方案,大而全
+比如 bootstrap vue angular react 
+bootstrap里面也能实现轮播图
+v3.bootcss.com 里面基于jquery语法
+
+插件：解决单一功能问题，体积小。小而专一
+比如 swiper
+
+### bootstrap轮播图
+v3.bootcss.com/javascript
+carousel 轮播图
+修改高度，chrome找出哪个元素高了，自己在css中改
+如果ui乱了，肯定是你的css覆盖了它的，chrome调试一下
+使用方法
+1.引入js
+2.复制html结构
+3.修改样式
+4.修改js参数
 
 
+## 本地存储
+比如 
+www.todolist.cn
+sessionStorage 能存5m
+localStorage 能存20m
+只能存字符串，可以用json
+### window.sessionStorage
+生命周期为关闭浏览器窗口（是这个页面，而不是整个浏览器）
+同一个页面可以共享
+key - value存储
+刷新页面数据也存在
 
+window.sessionStorage.setItem(key,value);
+window.sessionStorage.getItem(key);
+window.sessionStorage.removeItem(key);
 
+window.sessionStorage.clear();//删除所有
+#### chrome中查看
+chrome-》application栏 有个sessionStorage
 
+### window.localStorage
+永久有效，关闭页面也存在
+多个页面可以共享
 
+window.localStorage.setItem(key,value);
+window.localStorage.getItem(key);
+window.localStorage.removeItem(key);
+window.localStorage.clear();//删除所有
 
-
+判断是否有这个key
+if(window.localStorage.getItem(key)){
+    
+}
+### 案例：记住用户名
 
 
 
