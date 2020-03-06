@@ -209,21 +209,91 @@ $(this).animate({
 .siblings('.big').stop().fadeIn();
 
 
+===============
+=======day02===
+===============
+### jq获取元素属性
+获取
+$('').prop("属性名")
+设置
+$('').prop("属性名","属性值")
+
+$("input").change(function(){
+    $(this).prop('checked');
+});
+
+这个只能获取原有的属性
+
+### 获取自定义属性
+$().attr("index");
+$().attr("index",2);
+
+### h5 data自定义属性
+$().attr("data-index");
+
+### 数据缓存 data()
+$().data("key",""); 这个不会改dom结构
+而是存放在元素对象之中
+
+获取h5 data-属性,不用写data- 而且返回数字类型，上面attr是字符串
+$().data(”index“); 
+
+### 案例：购物车全选案例
+
+## jq对元素内容修改
+$().html();//获取内容,包括元素标签
+$().html("xxx");//设置内容
+等于innerHTML
+
+$().text();//只有内容，不包含标签
+
+获取表单
+$('input').val();
+设置
+$('input').val(”xxx“);
+
+### 案例：修改购物车商品数量
 
 
+## jq元素操作
 
+### 遍历元素
+$('div').each(function(index,domEle){
+    domEle是dom对象
+    可以转化
+    $(domEle).css('color',"red");
 
+});
 
+### 遍历
+$.each(obj,function(index,e){
 
+});
 
+obj可以是 jq对象
+可以是arr[]
+可以是对象
 
+$.each({name:"xxx"},function(key,value){
 
+});
 
+### 创建添加删除元素
 
+var li = $("<li>123</li>")//创建了
 
+1.内容添加，添加到元素内部
+$("ul").append(li);
+$("ul").prepend(li);//添加到最前面
 
+2.外部添加
+$("ul").after(div);
+$("ul").befor(div);
 
+删除元素：
+$("ul").remove();//删除元素本身
+$("ul").empty();//删里面所有元素
+$("ul").html("")//删除内容
 
-
-
+### 案例：商品添加删除操作
 
