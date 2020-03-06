@@ -297,3 +297,132 @@ $("ul").html("")//删除内容
 
 ### 案例：商品添加删除操作
 
+
+===============
+=======day03===
+===============
+## jq事件处理
+
+### 事件注册
+单个事件注册
+$('div').click(function(){});
+change(); resize ; scroll
+
+### on绑定
+多个事件
+$('div').on({
+    click:function(){},
+    mouseover:function(),
+
+});
+多个事件同一个响应
+$('div').on("click mouseover",funciton(){
+
+});
+
+优势2：事件委派，把子元素的事件绑定在父元素身上
+这样我们就可以给一个元素绑定事件了
+
+$('ul li').click();这样每个li都绑定了事件
+
+$('ul').on('click',"li",function(){
+
+});
+这个的触发对象是li，但是事件处理是绑定在父元素身上的
+
+* 老版本用bind ，现在用on
+
+优势3：
+未来创建的元素也能点击。用click不行
+比如ol中没有li，然后绑定了点击事件，那么传统的方法不会触发
+用on会触发
+
+
+### 案例：发布删除微博
+创建的li，开始是display:none的
+如果显示，调用 li.sildeDown()就行 jq动画
+
+这时li是动态添加的，所以里面的删除 事件得用on来注册
+删除：li.remove(); 删除自身
+
+### 解绑事件 off
+
+$('ul').off();//解除所有事件
+$('ul').off('click');//解除指定事件
+
+$('ul').off('click',"li");//解除事件委托
+
+
+### one事件
+只能触发事件一次
+写法同on
+
+### 自动触发事件 
+
+$('div').click();//自动调用click
+
+$('div').trigger('click');//
+
+//不会触发元素默认行为，比如input有焦点，点击就会获得焦点
+//这个方法触发的click不会有光标在闪烁
+$('div').triggerHandler('click');
+
+### jq事件对象
+$(div).on('click',function(e){
+    //和之前的点击事件对象差不多
+
+});
+
+## jq其他方法
+
+### jq拷贝对象
+$.extend([deep],target,object1,[objectN]);
+deep 默认false，浅拷贝
+target要拷贝的对象
+
+### 多库共存
+jq用$来做标识符，和别的库冲突了，如何解决
+
+jq解决方案
+1.就是把 $换成jQuery
+2.换成自己的名称
+var xxx = $.noConflict();
+var div = xxx(‘div’);
+
+### jq插件
+jq主要是做dom操作的
+www.jq22.com //jq插件库
+www.htmlleaf.com //jq之家
+比如：瀑布流，响应式（根据宽度改变布局）插件
+把demo css js引入，复制html css js代码
+
+
+### 图片懒加载
+展示的时候再加载，在list中
+减轻服务器压力
+www.jq22.com 搜索懒加载
+EasyLazyload.js
+引入js必须写在body的最后面
+
+### 整屏滚动
+滚动一下滚动一整屏，想竖直的viewpager
+github.com/alvarotrigo/fullPage.js
+可以用中文翻译网站
+www.dowebok.com/demo/2014/77/
+使用方法还是一样，引入相关js，css
+复制html结构，
+如果要自定义配置，可以看看各个属性的作用
+修改样式：chrome中找到元素的样式，你覆盖就行
+
+### bootstrap js 插件
+bootstrap基于jq
+v3.bootcss.com
+全局css样式：这个是人家给你定义好的样式，你拿来用就行
+组件（组合好的控件）：比如导航条，下拉菜单
+js插件：模态框(dialog)，tab栏，切换按钮，轮播图
+
+
+
+
+
+
