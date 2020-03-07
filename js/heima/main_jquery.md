@@ -421,7 +421,55 @@ v3.bootcss.com
 组件（组合好的控件）：比如导航条，下拉菜单
 js插件：模态框(dialog)，tab栏，切换按钮，轮播图
 
+### 案例：阿里百秀 
+bootstrap
+导航条
+分页效果
 
+### 综合案例：todolist
+
+### jq尺寸操作
+数字类型
+$().width();
+$().width(300);//设置
+
+$().innerWidth();//包含padding
+
+$().outerWidth();//包含padding,和边框
+
+$().outerWidth(true);//包含margin
+具体查手册
+
+### jq位置操作
+$().offset().top;距离document的坐标，和父亲没关系
+只有left和top
+$().offset({
+    top:200,
+    left:200
+});
+
+获取带有定位的父级 的相对坐标，所有父亲没有定位，就是document
+$().position()
+* 这个只能获取，不能设置
+
+滚动的位置
+$().scrollTop()
+$().scrollTop(100)//设置向下滚动100px
+
+$(window).scroll(function(){
+    $(document).scrollTop();
+})
+
+案例：监听页面滚动，显示返回顶部
+如果有动画，用jq的自定义动画即可
+$(”body,html“).stop().animate({
+    scrollTop:0
+});
+
+不能用document，只能对元素做动画
+
+### 案例：品优购电梯导航
+点击某个tab，滑动到某个位置
 
 
 
