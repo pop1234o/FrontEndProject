@@ -165,6 +165,281 @@ Object.prototype（原型对象）中的方法就相当于基类中的方法
 obj.hi = function(){};
 所以把这个例外去了记忆就好记了。
 
+### this指向
+构造函数中，this指向对象实例
+原型对象定义的函数，里面的this指向的是调用者，就是实例
+
+### 拓展内置对象
+比如Array对象中有很多现成的方法
+我们也可以给他自定义方法
+
+Array.prototype.sum = function(){
+    //遍历 this指向的就是Array
+    this[i];
+}
+chrome 自定义方法的颜色是深紫色，原生的是浅蓝色
+
+
+### call()
+调用这个函数，而且修改函数this的指向
+fun.call(thisArg,arg1,arg2...);
+
+因为函数本身就是个函数对象
+
+### es5继承
+通过构造函数和原型对象模拟继承，叫组合继承
+function Father(name){
+    this.name = name;
+}
+
+function Son(name){
+    //属性继承，通过call，修改浮父构造函数中的this
+    Father.call(this,name);
+}
+//继承方法
+
+这样是错误的，否则你在Son中加方法，父亲中也有了
+//Son.prototype = Father.prototype;
+
+可以这样
+Son.prototype = new Father();
+Son.prototype.constuctor = Son;
+
+调用关系见 extend_prototype.png
+
+### es5新增方法
+数组：
+forEach();遍历数组，参数你可以看文档
+map() 
+filter //创建一个新数组，里面过滤出满足条件的元素
+some//查找数组中是否有满足条件的元素，找到第一个有的，就返回true
+every 
+
+### 案例：商品查询
+
+### 字符串方法
+str.trim();去除两端的空白字符
+### 对象方法
+var arr = Object.keys(obj)//获取对象的所有属性
+返回属性名数组
+效果类似 for in
+
+定义或修改对象的属性
+原来没有就添加，有就修改值
+Object.defineProperty(obj,'num',{
+    value:1000,
+    //是否值可以被修改，就算你改也不生效
+    writeable : false;
+    //是否可以被枚举，被Object.key遍历
+    enumerable:false 
+    //是否可以被删除,或者重新设置特性
+    configurable:false
+});
+
+删除属性
+delete obj.num;
+
+=================
+======day03======
+=================
+函数高级用法
+### 函数定义
+1.function
+2.匿名函数 var fun = function(){}
+3.new Function(‘arg1’,‘arg2’,'函数体')
+函数体是字符串
+
+所有的函数都是Function的实例
+
+### 函数调用
+1.普通函数
+fn() fn.call();
+2.对象的函数
+obj.fn();
+3.构造函数
+new Fn();
+4.绑定事件函数
+//点击按钮调用
+btn.onlick = function(){}
+5.定时器函数
+setInerval(function(){});
+6.立即执行函数
+自动调用
+(function(){})()
+
+### this指向问题
+1.普通函数 window
+2.对象的函数 obj
+3.构造函数 实例
+4.绑定事件函数 触发元素
+5.定时器函数 window
+6.立即执行函数 window
+
+### 改变函数内部this指向
+call改变内部指向,主要用于实现继承
+apply(this,[argArray])
+必须传数组，有返回值
+
+Math.max.apply(Math,arr);
+
+bind
+var func = fun.bind(thisArg,arg1,arg2);
+不会立即执行函数，返回新的函数对象
+
+需要改变this，而不需要立即调用，就用bind
+
+比如发送短信按钮，60s后可以使用
+里面setTimeout的this指向window
+你可以用bind来改变指向
+setTimeout(function(){
+    this就是btn了
+}.bind(btn),3000);
+
+### 严格模式
+es5严格模式
+ie10以上支持
+消除js语法不严谨的地方
+提高编译效率
+
+1.为脚本开启严格模式
+在脚本头部写上
+'use strict'
+2.写函数头部
+function(){
+    'use strict';
+}
+
+#### 严格模式变化
+开启了严格模式会报错
+1.num = 10;//变量没有声明就赋值
+2.delete obj.num; //不能删除属性
+3.this指向，普通函数的this变成undefined
+原来是window
+4.构造函数必须要加new，因为不加new调用里面this指向undefined
+5.函数不能有重名参数
+function fn(a,a){
+}
+
+6.不允许在非函数代码块声明函数
+比如在if for中声明函数
+
+### 高阶函数
+传过来一个函数对象作为参数
+或者 返回一个函数对象
+function fn(callback){
+    //执行，先判断是否是null
+    callback&&callback();
+    //返回
+    return callback;
+}
+
+
+### 闭包
+闭包和异步是js两大难点
+闭包closure：就是指有权访问另一个函数作用域中变量的函数
+闭包就是一个函数，她有权访问其他作用域的变量
+闭包函数是被访问变量所在的函数
+function fn(){//这个是闭包函数
+    var num = 10;
+    function func(){
+        return num;
+    }
+}
+
+chrome中查看作用域
+在断点调试的时候，有个Scope栏
+Global-全局作用域
+Local-局部作用域
+Closure-闭包
+
+### 闭包作用
+function fn(){
+    var num = 10;
+    function func(){
+        return num;
+    }
+    return func;
+}
+
+var f  = fn();
+f();//执行后就访问了 fn中的num
+f指向fn内的函数
+
+### 闭包案例
+给每个li添加点击事件
+可以外面定义一个that，指向this，然后里面用that
+
+### 递归
+求阶乘
+
+### 浅拷贝和深拷贝
+Object.assign(o,obj);
+
+=================
+======day04======
+=================
+正则表达式
+表单验证，替换内容
+1.创建
+var reg = new RegExp('/123/');
+var reg = /123/
+检测
+reg.test(str);
+
+### 字符组成
+可以是简单字符
+包含：
+/123/ 只要包含123就是符合
+
+边界符：
+/^123/ 以123开头的
+/123$/ 以123结尾
+/^123$/必须是123，123123也是false
+
+可选：
+/[123]/ 只要包含1，2，3其中一个就符合（可选）
+/^[123]$/ 三选一 相当于
+/^1$/或/^2$/或/^3$/
+
+范围
+/[a-z]/ 包含a-z的任何一个就true
+/^[a-z]$/ 必须要a-z的一个字符才true
+/^[a-zA-Z0-9]$/ 大小写都行
+取反
+/^[^a-zA-Z0-9]$/ 不能包含
+中括号中包含^
+
+量词：
+*:0次以上
+/^a*$/
+
++：1次以上
+
+?:0次或1次
+
+重复n次
+/^a{3}$/
+
+n次以上
+/^a{3,}$/
+
+x-y次
+/^a{3,16}$/
+### 示例：
+/^[a-zA-Z0-9_]{6,12}$/
+用户名：只能输入数字字母下划线 横线，而且是6-12位的
+
+### 预定义的正则
+\d ：/[0-9]/
+^\d$ :/^[0-9]$/
+\D /[^0-9]/ 取反
+
+\w ：[a-zA-Z0-9_]
+\s [\t\r\n\v\f] 匹配空格 等制表符
+大写就是取反
+
+
+
 
 
 
