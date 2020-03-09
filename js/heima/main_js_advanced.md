@@ -438,18 +438,182 @@ x-y次
 \s [\t\r\n\v\f] 匹配空格 等制表符
 大写就是取反
 
+=================
+======day05======
+=================
+es5 2015年发布
+es6 2016 泛指2016以后的·版本
+一年一版
+es5缺点：
+变量提升导致程序不可预测
+语法松散，每个人代码风格不一样
+
+### let关键字
+块级作用域。以前只有全局和局部作用域
+if{
+    var b = 10;//这个在if外也能访问
+    let a = 10;
+}
+//在外层访问不了a，这样可以防止逻辑混乱
+
+for(var i =0;i<2;i++)
+//这样在for后面也能访问i
+for(let i =0;i<2;i++)
+
+#### let不存在变量提升
+let 必须先声明再使用
+a=5;
+var a;//这样有变量提升，那么没问题
+
+#### let暂时性死区
+var a = 10;
+if(true){
+    a = 'xxx';//会报错，因为if中有let a了，就死区了
+    let a = 'xxx';
+}
+
+#### let面试题
+let arr = [];
+for(let i=0;i<2;i++){
+    arr[i]=function(){
+        console.log(i);
+    }
+}
+arr[0](); //i==0
+arr[1](); //i==1
+//如果换成var 那么i就是2了，因为作用域不同
+
+### const关键字
+1.也具有块级作用域。
+2.是常量不能改变，否则报错
+3.而且声明时就要赋值，否则报错
+4.不存在变量提升
 
 
+### 解构赋值
+let {name,age}=
+一次给多个变量赋值
+#### 数组解构
+数组匹配变量
+let arr = [1,2];
+let [a,b]= arr;
+
+let [a,b]=[1,2];//给a b 分别赋值
+
+let [a,b]= [1];//b没有被赋值
+
+#### 对象解构
+对象属性匹配变量
+let person = {name:'xxx',age:20};
+let {name,age} = person;
+
+//给变量重新命名
+let {name:a,age:b} = person;
+
+### 箭头函数
+新增定义函数的方式。用来简化函数定义
+const fn = ()=>{}
+//简化函数体。如果函数体只有一句return，那么可以省略
+const fn = (num1,num2)=>num1+num2
+//省略形式参数小括号
+const fn = v=>v+1 ;
+
+#### 箭头函数this
+箭头函数this，指向的是上下文作用域的this，而不是调用者
+
+var obj={
+    age:20,
+    say: ()=>{
+        //这里是undefined，因为对象没有作用域
+        //这里是全局作用域，所以this是window
+        log(this.age);
+    }
+}
+相当于
+var obj={};
+obj.age = 20;
+obj.say = ()=>{
+    log(this.age);
+}
+
+### 剩余参数
+形参和实参个数可以不相等
+function sun(first,..args){
+    //arg是数组，接收多出来的实参
+}
+
+箭头函数使用不了arguments内置参数
+所以只能用剩余参数
+
+#### 结构的 剩余参数
+let [s1,..s2]=[1,2,3];//s2就是数组
 
 
+### 拓展运算符
+... 是拓展运算符，展开操作
+1.可以将数组或者对象，转换为用逗号分隔的序列
+let arr = [1,2,3];
+...aar就是// 1,2,3
+log(...aar);
+相当于 
+log(1,2,3);//打印出 1 2 3 ，没有逗号
 
+2.合并数组
+let arr1 = [1,2,3];
+let arr2 = [1,2,3];
+let arr3 = [...arr1,...arr2];
 
+3.转换伪数组转换为真正数组
+var divs = doc.getElementByTag
+var divArr = [...divs];
+这样就可以调用Array的方法了
+比如push 
 
+#### 数组和可遍历对象转换为真正的数组
+let array={//伪数组
+    '0':'a',
+    '1':'b',
+    'length':2
+}
+var arr = Array.from(array);
 
+#### Array 的方法
+不会看文档
+arr.find 找到符合条件的第一个元素，没找到返回undefined
+findIndex 找到第一个符合元素的index
+includes(n)看是否包含某个元素
 
+* 你要操作那个对象，比如数组，字符串，肯定有现成的api
+你查查文档就知道了。你得知道去哪找
+### String的拓展方法
+模板字符串 1左边的那个反引号
+可以嵌套变量，嵌套函数
+let str = `xxx${name}`;
+let str = `xxx${getName()}`;
+可以有换行
+可以用于http响应的数据展示，这样就不用写很多加号了
 
+str.startWidth
+str.endWidth
+str.repeat(3);//源字符串重复n次
 
+### Set数据结构
+相当于hashSet，不是map
+里面不能有重复元素
+var set = new Set(["a","b","c"]);
+set.size
 
+去除重复元素
+var set = new Set(["a","a","b",“b”]);//set
+var arr = [...set];
+
+set.add
+set.delete
+set.has
+set.clear
+
+变量
+s.forEach(value=>{});
 
 
 
