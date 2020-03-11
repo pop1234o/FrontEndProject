@@ -618,6 +618,37 @@ s.forEach(value=>{});
 
 
 
+===================
+========补充========
+===================
+### Promise  （ES6）
+有点像rxjava
+https://www.runoob.com/w3cnote/javascript-promise-object.html
+https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Guide/Using_promises (先看)
+https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Promise
+https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise (英文版)
+
+ECMAscript 6 原生提供了 Promise 对象。
+Promise 对象代表了未来将要发生的事件，用来传递异步操作的消息。
+避免了层层嵌套的回调函数
+var promise = new Promise(function(resolve, reject) {
+    // 异步处理
+    // 处理结束后、调用resolve 或 reject 回调函数
+});
+
+promise
+    .then(onFulfilled)
+    .catch(onRejected)
+
+
+
+### async/await (ES7)
+https://www.jianshu.com/p/5c7e707e064e （Async/await）
+https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/await
+
+
+
+
 
 
 

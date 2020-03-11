@@ -1,6 +1,6 @@
 Node基础
 (这个老师讲的不太好，不能和之前已知的平滑过渡，太跳跃，没有铺垫
-而且演示也不能特别全，比如失败了，参数的结构等
+而且演示也不能特别全，比如失败了，参数的结构等，使用场景也不明确
 还是pink厉害)
 属于服务端的技术
 为ajax做铺垫
@@ -86,6 +86,7 @@ exports.sayHi = funciton(){
 b.js导入
 导入的模块
 let a = require('./a.js')
+let a = require('./a')//也可以省略.js
 a就是一个object，对象中包含 变量和函数
 使用：
 a.sayHi();
@@ -99,6 +100,12 @@ exports是简写
 ### 导出原理
 其实就是 module.exports 指向一个对象
 把这个对象给别的模块使用
+
+### 导入模块查找路径
+const xxx = require('xxx.js');
+现在当前目录下找，没有
+去上一级目录的 node_modules找
+还没有就去，全局找
 
 ## node系统模块 （node api）
 比如系统模块，提供了写入和读取文件的能力api
@@ -145,9 +152,65 @@ __dirname就是当前目录的绝对路径
 * require的路径就是相对当前文件的路径，而不是相对执行node的目录
 
 ### 第三方模块
+别人写好的js，通常是多个js文件
+多个js文件放到一个文件夹（包）中。所以又叫js包
+模块名/包名
+
+两种形式：
+1.js文件
+2.cmd工具
+
+获取第三方模块 
+npmjs.com 一个比较大的 node package 管理工具
+
+npm也是一个第三方模块，已经被集成到node中
+npm install package/模块名 就能下载了
+只要不报红就下载成功。下载到执行npm的目录中
+有个node_modules目录，里面有下载的包
+
+
+删除模块：
+npm uninstall package
+
+命令行工具：推荐全局安装（如何全局安装后面说）
+js包：推荐本地安装（下载到你的项目中）
+
+
+### nodemon 第三方模块
+https://www.npmjs.com/package/nodemon
+automatically restarting the node application when file changes 
+原来每次修改js都要手动重新执行
+node xx.js来执行js
+
+nodemon：每次保存都执行node编译？？？
+
+npm install nodemon -g 下载 
+使用：
+nodemon xxx.js这样就被执行了
+然后程序挂起，监控文件保存操作。
+如果保存，就重新执行文件
+
+
+### nrm第三方模块
+npm registry manager 切换npm的下载地址
+之前是从国外网站下载包的，npmjs.com
+国内就有一个国外的镜像，比如阿里的镜像，每10分钟同步一次。
+
+使用：
+安装nrm ： npm install nrm -g
+查询可用下载地址 ：nrm ls
+切换： nrm use taobao
+切换到了registry.npm.taobao.org
 
 
 
+====================
+========补充=========
+====================
+
+### Node 7 async/await
+https://www.jianshu.com/p/5c7e707e064e （Async/await）
+https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/await
 
 
 
