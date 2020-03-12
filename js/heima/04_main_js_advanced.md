@@ -621,6 +621,35 @@ s.forEach(value=>{});
 ===================
 ========补充========
 ===================
+### js编译(转换)
+其实就是把es5以后的js语法转换成es5的语法
+这样浏览器就能执行（因为浏览器的js解析引擎更新没那么快）
+而且肯定有用户用旧版的浏览器，所以就需要转换（编译一下）
+
+### Babel 转换工具
+https://babeljs.io/
+https://babeljs.io/docs/en/index.html （官方文档）
+
+介绍：
+Babel is a toolchain that is mainly used to convert ECMAScript 2015+ code into a backwards compatible version of JavaScript in current and older browsers or environments
+就是把es5以后的js代码转换成浏览器支持的es5
+
+* 若干年以后老的浏览器都没人用了，我们就不用转换了
+但是到时肯定有新的es版本，所以总有这样的问题
+
+### js并发模型和事件循环
+https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/EventLoop
+js异步使用的是类似Android handler的模型
+while (queue.waitForMessage()) {
+  queue.processNextMessage();
+}
+* js执行完一个消息后才能执行下一个，
+这样就可能导致后面的任务等待时间太长，
+一个很好的做法是缩短消息处理，并在可能的情况下将一个消息裁剪成多个消息
+
+* 所以它没有真正的并发，一个函数执行时，它永远不会被抢占
+所以就没有锁的概念
+
 ### Promise  （ES6）
 有点像rxjava
 https://www.runoob.com/w3cnote/javascript-promise-object.html
@@ -631,9 +660,12 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects
 ECMAscript 6 原生提供了 Promise 对象。
 Promise 对象代表了未来将要发生的事件，用来传递异步操作的消息。
 避免了层层嵌套的回调函数
+
+//这时new的代码是立即执行，但是then的回调是异步的
 var promise = new Promise(function(resolve, reject) {
     // 异步处理
     // 处理结束后、调用resolve 或 reject 回调函数
+    resolve('success')
 });
 
 promise
@@ -643,8 +675,21 @@ promise
 
 
 ### async/await (ES7)
-https://www.jianshu.com/p/5c7e707e064e （Async/await）
 https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/await
+https://segmentfault.com/a/1190000007535316 （理解 JavaScript 的 async/await）
+
+https://www.jianshu.com/p/5c7e707e064e （Async/await）
+
+
+
+这个 node 都要 8 以上才能用，浏览器肯定是要 babel 的
+
+#### async
+https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/async_function
+
+async function testAsync(){}
+修饰的方法
+
 
 
 

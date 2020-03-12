@@ -90,6 +90,10 @@ let a = require('./a')//也可以省略.js
 a就是一个object，对象中包含 变量和函数
 使用：
 a.sayHi();
+### 关于require 
+Node.js 提供了 exports 和 require 两个api
+这是node独有的，就像dom是浏览器独有的，我们可以直接调用window等dom对象
+
 ### 另一个导出方案
 module.exports.name = "";
 module.exports.sayHi = funciton(){}
@@ -205,13 +209,88 @@ npm registry manager 切换npm的下载地址
 
 
 ====================
-========补充=========
+========day02补充=========
 ====================
+### package.json问题
+node_modules文件夹
+里面都是我们依赖的第三方模块（js文件）
+两个问题：
+1.协同开发可能导致版本号对应不上，
+2.你不能把这个文件夹也提供到仓库中，因为太大了
 
-### Node 7 async/await
-https://www.jianshu.com/p/5c7e707e064e （Async/await）
-https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/await
+解决方案:
+node提供了package.json，描述项目的
+根目录 ：npm init -y -yes使用默认值的参数
 
+* node模块化开发需要指定一个主模块入口
+* 当我们用npm install一个模块的时候，node就会在
+package.json添加依赖了
+
+别人用的时候，在根目录执行 npm install这样就能根据
+package.json 中的依赖自动下载了
+
+#### 开发依赖
+开发中用的
+npm install xxx --save-dev
+这样在 package.json 就有 devDependencies{}
+比如gulp是开发依赖，正式不需要
+
+我们执行 npm install 会下载全部依赖 
+npm install --production 就不会下载devDependencies
+
+#### package-lock.json
+npm自动生成，记录了模块之间的依赖关系
+
+#### package.json scripts使用
+给脚本起别名，比如我们要运行程序
+就要执行 nodemon app.js
+这时我们可以起个别名，提供效率
+npm run 别名
+* 如果命名长就很方便
+
+### require()查找机
+1.
+require(‘./find’)
+先找同名js后缀的文件 find.js
+没有就找同名文件夹下的index.js :find/index.js
+没有就找 find/package.json 中main选项的入口文件
+没有就报错
+
+2.
+require(‘find’)
+node认为他是系统/第三方模块
+先去node_modules找，find.js
+再找 find目录的index.js
+再找 find package.json 中main入口
+
+## 服务端基本概念
+### URL
+
+### 创建web服务器（node http模块）
+用到系统模块 http
+https://www.w3schools.com/nodejs/nodejs_http.asp
+(这里有示例) 
+新建server.js
+var http = require('http');
+http.createServer(function (req, res) {
+  res.writeHead(200, {'Content-Type': 'text/html'});
+  res.write(req.url);
+  res.end();//返回响应
+}).listen(8080);
+
+执行node server.js就创建了一个node服务，监听8080端口
+cmd 按 control+c结束进程（终止这个服务）
+
+浏览器中访问 http://localhost:8080/
+
+### http协议
+看http报文
+chrome中Network
+我们就能看到所有请求了，
+能看到header，response等信息
+
+### 浏览器发出两次请求
+因为有一次请求是请求 网站的ico图标的
 
 
 

@@ -25,14 +25,42 @@ src放源文件js，dist就是g构建后的文件目录
 4.编写 gulpfile.js 任务
 5.执行构建
 
-### g提供的方法
+* 安装 gulp-cli ，这个是gulp的一个命令行工具
+用来执行gulpfile.js中的task的
+npm install gulp-cli -g （全局安装，每个工程都能用）
+### 编写 gulpfile.js 任务
+1.在这个js中引入gulp
+2.新建任务
+3.获取要处理的文件，处理，输出到dist目录
+4.执行gulp任务 gulp taskName 
+这样gulp就会自动在当前工程下找 gfile文件，然后解析执行 task
+
+(它值提供了5个方法)
+要做处理只能安装插件
+5.处理完html css js，还有吧img和lib中的文件拷贝到dist中
+编写任务拷贝
+
+6.为了统一执行所有任务，可以创建构建任务
+把上面的任务包含进去，可以命名为default,gulp默认执行
 
 
+### gulp插件
+g只提供基础功能，想html css js语法转换都需要插件
 
+还是得用  npm 下载
+gulp-xxx
 
+使用：
+不用背，可以到查询文档
+npmjs.com/package/插件名
 
-
-
+### g能实现的功能
+1.抽取html公共代码 gulp-file-include
+1.压缩html gulp-htmlmin
+2.压缩css gulp-csso
+3.js语法转换，压缩 gulp-babel gulp-uglify
+babel有依赖的模块，所以要一起下，具体见文档
+4.less转换css gulp-less
 
 
 
