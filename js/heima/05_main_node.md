@@ -266,7 +266,7 @@ node认为他是系统/第三方模块
 ## 服务端基本概念
 ### URL
 
-### 创建web服务器（node http模块）
+## 创建web服务器（node http模块）
 用到系统模块 http
 https://www.w3schools.com/nodejs/nodejs_http.asp
 (这里有示例) 
@@ -289,8 +289,211 @@ chrome中Network
 我们就能看到所有请求了，
 能看到header，response等信息
 
-### 浏览器发出两次请求
+浏览器发出两次请求：
 因为有一次请求是请求 网站的ico图标的
+
+### 根据path返回不同内容
+通过 req.url 来判断返回的内容
+如果不存在则统一处理
+默认 req.url是 '/'
+
+### 获取header
+req.headers，里面有host主机地址
+
+req.headers['host']
+
+req.method 获取请求方式
+
+### 响应报文
+
+#### 设置状态码
+200 成功
+400 客户端请求有问题，比如method错误，参数错误
+404 资源没被找到
+500 服务端错误
+
+//不写就是200
+res.writeHead(500);
+
+#### 内容类型
+text/plain 默认纯文本
+text/html
+image/jpeg
+application/json
+res.writeHead(200,{
+    content-type:'text/plain'
+});
+
+#### 设置编码
+res.writeHead(200,{
+    content-type:'text/plain;charset=utf8'
+});
+不设置就乱码
+
+### 处理请求参数 内置模块 url
+https://nodejs.org/api/url.html
+node提供了内置模块 url
+get参数 
+url.parse(req.url)
+url.query 不带?的
+//解析成对象
+url.parse(req.url,true)
+url.query 是个json对象
+
+上面可以改成用 url.pathname来判断页面路径
+
+post参数
+form表单提交
+post参数格式和get一样，都是xx=xx&xx=xx
+post参数不是一次都接收完的
+req.on('data', params => {
+        postParams += params;
+})
+
+### 路由
+根据访问路径，返回不同内容，来访问不同内容
+
+
+### 实现静态资源访问
+比如访问 img html css js，直接把内容返回就行
+web端根据请求路径，找到文件，返回
+
+根据__dirname来获取当前文件所在路径
+
+* 没有Content-Type浏览器也能展示，这是因为浏览器做了兼容
+
+## nodejs 异步api
+同步api，一句代码执行完，再执行下一句
+比如 console.log();
+异步api，当前代码执行不会阻塞后续代码执行
+setTimeout(()=>{},300);
+()=>{}被加到任务队列中
+
+* 类似于Android的handler模型
+
+### callback hell 问题
+回调地狱
+比如 b执行依赖a执行完成，c依赖b
+那么就有很多回调问题
+
+### es6 Promise
+解决回调地狱问题
+new Promise((resolve,reject)=>{
+    //把异步api写到这，然后执行结果可以通过resolve返回
+    //这样我们的的回调就变成链式编程了
+    //你要是在这不写异步的没什么意义
+    fs.readFile('file','utf8',(err,result)=>{
+        if(!err){
+            resolve(result);
+        }else{
+            reject(err);
+        }
+    });
+    
+}).then(result=>{
+    return new Promise();
+}).then(secondResult=>{
+
+}).catch(err=>{
+
+});
+
+* 有点像rxjava的调用链 观察者模式
+* 大多数人仅仅是使用已创建的 Promise 实例对象
+这样回调看着就是链式调用了
+* async就是用来配合里面 await的
+### async await
+https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/async_function
+Promise还是太冗余，设计真der
+async+await 就是语法糖
+
+//默认返回一个Promise{undefined}
+async function fn(){
+    //return 替代了resolve
+    //throw 替代了 reject
+    return 123;
+}
+
+fn().then(data=>{
+
+})
+上面好像没啥应用场景
+
+#### await
+必须在async函数中
+用来修饰 返回Promise的函数，表示等待Promise返回结果
+相当于代替then了，你可以想象他后面的代码就是在这个Promise的then中的
+
+* The purpose of async/await is to simplify using promises synchronously
+#### promisify 方法
+在util模块中的方法，对现有方法包装，返回Promise
+const promisify= require('util').promisify;
+const readFile = promisify(fs.readFile);
+async function run(){
+    let r1 = await readFile('1.txt');
+    let r2 = await readFile('2.txt');
+    let r3 = await readFile('3.txt');
+}
+
+* await好像还有点用，async就是陪衬
+
+
+## node全局对象
+node没有window，但是有global全局对象，使用可以省略
+
+global.console.log()
+global.setTimeout();
+
+
+
+===================
+========补充========
+===================
+### node能用来做大型网站的服务端吗
+（https://www.zhihu.com/question/21176891）
+https://segmentfault.com/q/1010000011321811（nodejs写大型web应用可行吗？）
+
+我们目前使用的框架是Express，用pm2启动管理进程，nginx做代理
+node强项是高并发和异步队列
+node可以做中间件，搭配java，用java来实现复杂业务
+
+优点（在我看来）：
+事件驱动、异步编程，轻量高效，上手快，非阻塞模式的IO，特别适合计算逻辑不多的“短小”请求响应。
+缺点（在我看来）：
+健壮性低，不适合有着负责计算逻辑的系统。
+
+结论：目前node中小型业务没问题，大型多人的业务还得用java
+
+
+### node既然是单线程，如何实现高并发？
+其实node.js底层使用c++写的，也是用的线程池的技术。 线程池+回调函数，我应该10年前看异步非阻塞IO的时候就看到过线程池+回调函数处理异步了。
+
+其实如果是单核，你多线程也没有意义，因为所有线程都必须在同一个cpu中执行
+而且还会带来切换线程的消耗。
+比如java的io操作是阻塞的，你读取的io操作会阻塞后面代码的执行，而且新的请求进来也被阻塞住了
+所有不能高并发，所以java采用多线程(线程池)来处理,这样就能充分利用多核优势
+而node多核下也是但线程，所以只能利用一个cpu，所以利用率不高。
+所以后面node就有了多工作进程？？
+
+### node有多线程吗
+https://zhuanlan.zhihu.com/p/74879045（理解Node.js中的"多线程"）
+Node.js 保持了JavaScript在浏览器中单线程的特点。它的优势是没有线程间数据同步的性能消耗也不会出现死锁的情况。所以它是线程安全并且性能高效的。
+弱点：无法充分利用多核CPU 资源，CPU 密集型计算可能会导致 I/O 阻塞，以及出现错误可能会导致应用崩溃。
+
+好像后面提供了模块实现了子进程，然后还有工作线程
+所以你不使用这些模块node就是单线程的
+
+
+
+### 使用当前电脑作为外网访问的服务器
+https://www.zhihu.com/question/47537177 （如何把自己的电脑改成服务器在外网可以访问？）
+路由有防火墙，互联网用户只能访问到你的路由器WAN口，接ADSL的电话线口或路由宽带外网口)
+而访问不到内部服务器。要想让互联网用户访问到你建的服务器，就要在路由器上做一个转发设置，也就是端口映射设置，让互联网用户发送的请求到达路由器后,再转发到你建立的服务器或WEB站点。这就是端口映射
+
+打开路由器找到映射设置（端口转发）
+查看自己电脑在路由中的地址
+ifconfig，肉眼找一下
+然后做了一个映射
 
 
 

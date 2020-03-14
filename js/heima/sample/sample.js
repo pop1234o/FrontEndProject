@@ -26,8 +26,8 @@ async function testAsync() {
     return "hello async";
 }
 
-const result = testAsync();
 console.log(2);
+const result = testAsync();
 
 // console.log(result);返回一个
 result.then(result=>{
