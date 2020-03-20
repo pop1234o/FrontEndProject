@@ -279,6 +279,201 @@ if(pathname=='/list'){
 const queryString = require('queryString');
 queryString.parse(formdata);
 
+## 模块化开发
+
+### 代码都写到一起的问题
+project 目录
+model 目录 数据库操作
+-index.js 创建连接数据库
+-user.js 操作user表的函数
+导出User的构造函数
+
+### 字符串拼接问题
+(数据和html拼接)
+以前我们返回html都是在js中
+用字符串把查询出来的数据拼接好
+这样代码就很乱，可以用模板引擎
+
+### 模板引擎 art-template
+art-template(腾讯出品)
+第三方模块，不是node自带的模块
+npm install art-template
+const template = require('art-template');
+
+const html = template('xxx/xx.art',data)
+art文件里是html代码
+data是json对象（就是数据）
+
+<span>{{data.name}}</span>
+
+* 新建views 目录，代表模板目录，
+* art文件就是一种动态的html，解析引擎会把art转换成html
+
+#### 两种模板语法
+原始语法就是 <%%>中写js代码
+
+1.输出
+标准语法:{{数据}}
+原始语法：<%=数据%>
+里面可以是表达式
+
+输出html，原始字符串，不会转义
+{{@数据}}
+<%-数据%>
+
+2.条件判断
+根据数据条件展示数据
+{{if 条件}}  {{/if 条件}}
+
+{{if v1}}  {{else if 条件}}  {{/if 条件}}
+
+原始语法
+<%if(条件){%> ... <%}%>
+
+
+3.循环
+展示一组数据
+{{each 数据}}  
+    {{$index}} 
+    {{$value}}
+{{/each}}
+
+原始语法
+<%for(var i = 0;target.length<10;i++>){%> 
+    <%=target[i]%>
+<%}%>
+
+
+### 子模板
+把相同的布局抽取出来
+{{include '模板路径.art'}}
+原始语法
+<%include('模板路径.art')%>
+
+### 模板继承
+把html骨架抽离到单独文件中
+html骨架：每个页面都有的代码，类似BaseActivity
+每个页面都继承html骨架
+
+骨架.art
+{{block 'name'}} {{/block}}
+
+index.art继承
+{{extend './骨架.art'}}
+{{block 'name'}}填充的内容{{/block}}
+
+* 常用的预留位置有 link  content
+
+### 模板配置
+#### 调用第三方模块的方法
+在模板中调用第三方模块的方法
+
+比如对时间格式格式化
+#### 第三方模块-dateformat
+npm install dateformat
+const dateFormat  =require('dataformat');
+let date = new Date();
+dateFormat()
+
+模板中引入，需要在外面用
+template.defaults.imports.dateFormat = dateFormat
+template('xxx.art',{});
+这样就能在 xxx.art 中使用了
+
+### 设置模板根目录
+
+template.defaults.root = 'views'
+这样就不用拼接目录了
+
+配置默认后缀，这样就只写文件名就行
+template.defaults.extname = 'art'
+
+
+### 案例：学生档案管理
+熟悉模板使用，进行数据展示
+1.建立项目文件夹，生成描述文件 npm init -y
+2.创建网站服务器
+3.链接数据库
+4.创建路由，实现模板呈递
+5.服务器 实现静态资源访问，比如css js img
+6.学生信息添加
+7.学生信息展示
+
+student
+ model -> 数据库操作
+  connect.js 链接数据库
+  user.js user表的操作
+ app.js 引入数据库操作的js文件，引入就执行了
+
+### 第三方模块-router
+以前都是用if else判断，多了就很乱
+
+npm install router
+const getRouter = require('router');
+const router  = getRouter();
+//监听 get请求的 /add
+router.get('/add',(req,resp)=>{
+    resp.end('ok');
+});
+//请求分发
+server.on('request',(req,resp)=>{
+    router(req,resp,()=>{
+        请求响应结束回调
+    });
+})
+
+* 以上写法逻辑清晰，有多少个页面就写多少个路由
+
+### 创建模板文件
+public放静态资源
+views放模板文件
+
+### 第三方模块-serve-static
+实现静态资源访问服务
+npm install serve-static;
+const serveStatic = require('serve-static');
+//写入目录，写绝对路径 
+path.join(__dirname,'public');
+
+const serve = serveStatic('public')
+server.on('request',(req,res)=>{
+    //实现，写到router下面
+    serve(req,res,()=>{});
+
+})
+server.listen(8080);
+
+### 接收post参数
+要监听data事件，用到queryString第三方模块
+路由在app.js写，接收到请求的处理也是在app.js中
+
+
+### 学生列表展示页
+1.查询
+2.拼到模板上
+3.返回
+
+### 逻辑拆分
+新建route文件夹，index.js
+把app.js 的router的代码，放到index.js中
+
+在app.js中require index.js
+就能执行index.js中的代码了，如果要用到可以
+module.export
+
+project
+ model-数据库
+ public-静态资源
+ route-路由处理
+ views-模板页面
+ app.js node执行的总入口，创建服务器，等操作
+
+ 
+
+
+
+
+
 
 
 
