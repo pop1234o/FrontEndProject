@@ -1,15 +1,38 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <script src="https://qz-front.oss-cn-beijing.aliyuncs.com/onlineJsBridge/MonkeyConnectWebViewBridgeSDK.js"></script>
 </head>
+
 <body>
     <h1>welcome my page</h1>
+    <button id="btn">点击</button>
 </body>
 <script>
-    window.location.href= "https://fx.100tal.com/catkin-upload/android/%E5%AD%A6%E8%80%8C%E6%80%9D%E5%8F%A3%E7%AE%97/online/2020-03-13/app-monkey_oral_bbk-online-1584070523599.apk";
-    
+    var isInit = false;
+    document.getElementById("btn").onclick = function () {
+        if (isInit) {
+            callMiniProgram();
+        } else {
+            window.MonkeyConnectWebViewBridgeSDK.initJsBridge(function () {
+                isInit = true;
+                callMiniProgram();
+            });
+        }
+
+    }
+
+    function callMiniProgram() {
+        // 通过JsBridge调用原生方法，写法固定，第一个参数时方法名，第二个参数时传入参数，第三个参数时响应回调
+        var data = { programId: "gh_8837c113f8e2", path: "/pages/group", type: 0 };
+        window.WebViewJavascriptBridge.callHandler('launchWeixinMiniProgram', data, function (response) {
+
+        });
+    }
 </script>
+
 </html>
