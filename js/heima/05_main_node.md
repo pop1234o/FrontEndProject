@@ -206,7 +206,7 @@ npm registry manager 切换npm的下载地址
 切换： nrm use taobao
 切换到了registry.npm.taobao.org
 
-
+npm代理
 
 ====================
 ========day02补充=========
