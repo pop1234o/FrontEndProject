@@ -2,15 +2,62 @@
 mongodb api采用js语法，所以用它
 
 ### 安装
+（奇数是开发版本，偶数是稳定版本）
 https://www.mongodb.com/
 下载
 https://www.mongodb.com/download-center/community
+
+https://www.mongodb.com/zh(中文)
 
 下载compass-是MongoDB gui界面
 也可以在安装mongodb的时候联网下载
 
 node.js通过api操作数据库
 compass通过图形界面操作数据库
+
+MongoDB 是由C++语言编写的，是一个基于分布式文件存储的开源数据库系统
+### 镜像
+https://developer.aliyun.com/mirror/ （阿里云的软件镜像）
+
+### 用命令行安装mongodb
+https://www.runoob.com/mongodb/mongodb-linux-install.html
+
+（下载不同版本链接可以从这里查到https://www.mongodb.com/download-center/community ，选中就会出现）
+curl -O https://fastdl.mongodb.org/linux/mongodb-linux-x86_64-3.0.6.tgz    # 下载
+tar -zxvf mongodb-linux-x86_64-3.0.6.tgz                                   # 解压
+
+mv  mongodb-linux-x86_64-3.0.6/ /usr/local/mongodb                         # 将解压包拷贝到指定目录
+
+#添加环境变量  /usr/local/mongodb 
+export PATH=<mongodb-install-directory>/bin:$PATH
+
+### mac安装教程
+https://www.runoob.com/mongodb/mongodb-osx-install.html （Mac OSX 平台安装 MongoDB）
+开vpn 下载 ，2分钟 ，80M
+cd usr/local
+sudo curl -O https://fastdl.mongodb.org/osx/mongodb-osx-ssl-x86_64-4.0.9.tgz
+解压
+sudo tar -zxvf mongodb-osx-ssl-x86_64-4.0.9.tgz
+重命名
+sudo mv mongodb-osx-x86_64-4.0.9/ mongodb
+添加环境变量
+export PATH=/usr/local/mongodb/bin:$PATH
+
+### 通过yum安装
+https://www.cnblogs.com/LongJiangXie/p/6080791.html （CentOS7使用阿里云镜像安装Mongodb）
+https://mirror.tuna.tsinghua.edu.cn/help/mongodb/ （清华-MongoDB 镜像使用帮助）
+https://developer.aliyun.com/mirror/mongodb?spm=a2c6h.13651102.0.0.3e221b11saxh58 （阿里云-MongoDB 镜像）
+
+### 安装后添加数据目录
+这是默认目录
+sudo mkdir -p /data/db
+
+也可以指定
+sudo mongod --dbpath=/data/db 
+
+man mkdir可以查看文档
+如果不加 -p   /data: No such file or directory
+可以自动创建中间的文档
 
 ### 基本概念
 database collection document field
@@ -468,7 +515,7 @@ project
  views-模板页面
  app.js node执行的总入口，创建服务器，等操作
 
- 
+
 
 
 
