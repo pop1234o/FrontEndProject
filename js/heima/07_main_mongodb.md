@@ -43,6 +43,7 @@ sudo mv mongodb-osx-x86_64-4.0.9/ mongodb
 添加环境变量
 export PATH=/usr/local/mongodb/bin:$PATH
 
+(https://www.jianshu.com/p/55e3b3d6ca6b )
 ### 通过yum安装
 https://www.cnblogs.com/LongJiangXie/p/6080791.html （CentOS7使用阿里云镜像安装Mongodb）
 https://mirror.tuna.tsinghua.edu.cn/help/mongodb/ （清华-MongoDB 镜像使用帮助）
@@ -58,6 +59,12 @@ sudo mongod --dbpath=/data/db
 man mkdir可以查看文档
 如果不加 -p   /data: No such file or directory
 可以自动创建中间的文档
+
+### mac 启动mongodb
+sudo mongod //必须加sudo用管理员权限，否则mongod无权访问 /data/db
+在控制台能看到 mongod进程说明启动成功
+
+按ctrl+c结束 mongod进程
 
 ### 基本概念
 database collection document field
