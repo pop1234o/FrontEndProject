@@ -1,6 +1,7 @@
 # 数据库
 mongodb api采用js语法，所以用它
 
+https://www.runoob.com/mongodb/mongodb-tutorial.html （菜鸟教程）
 ### 安装
 （奇数是开发版本，偶数是稳定版本）
 https://www.mongodb.com/
@@ -86,7 +87,9 @@ windows:
 net start mongodb
 net stop mongodb
 
-### node连接 MongoDB
+### mongoose-node连接 MongoDB
+https://mongoosejs.com/
+https://mongoosejs.com/docs/index.html （官方文档）
 需要通过 mongoose 这个第三方模块
 npm install mongoose
 确保数据库服务启动
@@ -522,13 +525,60 @@ project
  views-模板页面
  app.js node执行的总入口，创建服务器，等操作
 
+===============
+=====命令行====
+===============
+## 命令行使用mongodb
+https://www.runoob.com/mongodb/mongodb-databases-documents-collections.html
+
+### 连接数据库
+mongo
+
+### 查看/创建 删除 数据库 
+show dbs
+显示当前数据库对象或集合
+db 
+运行"use"命令，可以连接到一个指定的数据库。
+use test
+果数据库不存在，则创建数据库，否则切换到指定数据库。
+use DATABASE_NAME
+* 必须数据库里有数据用 show才能展示
+删除-选中数据库
+db.dropDatabase()
+
+### 创建 查询 表/集合
+查询
+show collections
+创建
+db.createCollection("runoob")
+删除
+db.collection.drop()
+
+### 查询 插入数据
+插入数据
+db.COLLECTION_NAME.insert(documentJson)
+查询数据
+db.COLLECTION_NAME.find()
 
 
+=====================
+=====可视化管理后台===
+=====================
+mongodb可视化管理后台
+### mongo-express
+https://github.com/mongo-express/mongo-express
+使用NodeJS、Express、Bootstrap3编写而成。
 
+### adminMongo
+这个看上去简单点
+https://github.com/mrvautin/adminMongo
 
-
-
-
+按照步骤clone 下来
+npm install 下载包，等待完成
+然后 npm start 执行预置脚本
+然后 访问 http://localhost:1234/
+创建连接
+mongodb://localhost/
 
 
 
