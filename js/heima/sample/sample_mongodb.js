@@ -11,8 +11,8 @@ mongoose.connect('mongodb://localhost/test', { useNewUrlParser: true })
 const schema = new mongoose.Schema({
     name: String,
 });
-//创建表，实际名称都是加个s
-const Test = mongoose.model('runoob', schema);
+//创建表，实际名称都是加个s，如果不想加s要加第三个参数
+const Test = mongoose.model('runoob', schema, 'runoob');
 
 Test.create({ name: "pop" }).then(doc => {
     console.log('insert:' + doc);
