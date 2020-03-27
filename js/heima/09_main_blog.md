@@ -26,6 +26,10 @@ bcrypt - 明文密码加密
 node 默认找 package.json中main指定的文件执行
 
 用nodemon执行，这样文件变了会自动帮我们重新执行
+
+### express最佳实践
+https://expressjs.com/zh-cn/advanced/best-practice-security.html （生产环境最佳实践：安全）
+
 ### 创建各个模块路由
 使用use 来设置各个url目录的中间件
 
@@ -86,6 +90,8 @@ server->cookie:sessionId:xxx->client
 client->cookie:sessionId:xxx->server
 
 #### 第三方模块-express-session
+https://www.npmjs.com/package/express-session
+https://juejin.im/post/5ca7c191f265da30ac21adae (翻译)
 npm install express-session
 //session处理器
 const session = require("express-session");
@@ -103,6 +109,15 @@ req.session.username 就能用了
 每次服务端接收到请求，都会根据id查找出对应的session对象给我们，就省得我们自己存，自己查找了
 
 ）
+app.use(session({
+    secret: 'secret',
+    resave: false,
+    saveUninitialized: true,
+    cookie: { secure: false }
+}));
+
+* 网站服务器重启，session消失
+
 
 ### session窃取
 https://cloud.tencent.com/developer/article/1043362 （基于Session的身份窃取）
@@ -111,9 +126,18 @@ https://cloud.tencent.com/developer/article/1043362 （基于Session的身份窃
 
 https://juejin.im/entry/592e286d44d9040064592a7b (干掉状态：从 session 到 token)
 
+### 重定向
+res.redirect('/pop/user')
 
+### 保存登录数据
+  //把用户信息保存到app这个对象里面，就能在模板中用 userInfo访问了
+  locals是app （Express对象）自带的属性
+ req.app.locals.userInfo = user;
 
+{{userInfo.name}}
 
+### 登录拦截
+模板报错就会停止解析，输出错误信息
 
 
 

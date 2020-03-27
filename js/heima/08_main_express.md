@@ -200,7 +200,9 @@ app.locals.user={
 {{user.name}}
 
 
-
+### middleware目录
+专门放中间件，比如登录拦截，404，路由的callback函数都能单独放到一个js中
+每个js都是一个模块，都无法相互引用，必须导出
 
 
 
