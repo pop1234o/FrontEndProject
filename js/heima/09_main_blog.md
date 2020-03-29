@@ -166,10 +166,23 @@ Joi.validate({ username: 'abc', birthyear: 1994 }, schema, function (err, value)
 async 函数返回 Promise对象 
 可以用 await来等里面的返回值
 
+如果一个函数返回promise对象，那么我们在外面可以用await来修饰
+默认的async 函数返回的就是promise对象
 
+### 错误处理中间件
 
+(req,res,next)=>{
+    next(errStr);
+}
 
+有个中间件
 
+### @ 原文输出
 
+### 数据分页
+总页数 Math.ceil(总条数/每页多少条)
+查询：skip((currentPage-1)*每页多少条)  limit(每页多少条)
+把当前页数和total传到html中展示
+用的原始模板语法  <%语句%> <%=表达式%>
 
 
