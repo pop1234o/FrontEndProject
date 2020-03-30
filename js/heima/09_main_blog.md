@@ -186,3 +186,40 @@ async 函数返回 Promise对象
 用的原始模板语法  <%语句%> <%=表达式%>
 
 
+### 用户信息修改
+
+### 删除逻辑
+删除按钮需要绑定用户id
+就是在表单添加隐藏域
+<input type='hiden' name='id' value="动态设置">
+
+### 文章管理
+req.app.locals.xxx 这样art中能直接访问xxx
+req.app就是express对象
+
+### 图片上传
+需要制定form上传编码格式
+enctype="multipart/form-data"
+这种指定的part名称
+
+默认是 application/x-www-from-urlencoded 
+key=value&&key=value
+
+### 解析图片上传参数
+bodyparser不支持文件上传 enctype="multipart/form-data"
+得用第三方模块-formidable
+
+
+{"cover":{"size":6222583,"path":"/Users/liyafeng/Documents/xx/public/uploads/upload_8f9099dc70de575d5674e18e3b570291.pptx","name":"xx.pptx","type":"application/vnd.openxmlformats-officedocument.presentationml.presentation","mtime":"2020-03-30T15:42:35.506Z"}}
+
+
+### 让所有art中访问登录用户自己的session
+https://segmentfault.com/q/1010000003993234（如何在Express.js 4.* 的大量模板中访问req.session？）
+在所有路由之前加拦截器
+res.app.locals.session = req.session;
+req.session//就是请求带过来cookie中sessionId对应的session对象，每个用户都不一样
+
+{{session.userInfo}}
+
+
+
