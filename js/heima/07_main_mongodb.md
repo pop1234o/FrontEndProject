@@ -532,7 +532,33 @@ project
 https://www.runoob.com/mongodb/mongodb-databases-documents-collections.html
 
 ### 连接数据库
+管理员方式运行  sudo 
 mongo
+
+### 创建管理员账号
+管理员方式运行  sudo 
+mongo 连接
+show dbs
+use admin
+//针对这个数据库创建的用户
+db.createUser({user:'xxx',pwd:'xxx',roles:['root','readWrite']})
+
+处理用命令行，用代码也可以实现
+https://docs.mongodb.com/manual/reference/method/db.createUser/ 
+
+然后停止服务
+重启  
+sudo mongo --auth
+
+mongodb://user:pwd@localhost:27017/datebase
+
+* 管理员和子账号重名了，链接某个数据库，密码得用那个数据库的账户
+### 查看所有数据库账号
+sudo mongo 链接数据库
+use admin
+db.auth('admin','123456') 输入root的管理员账号和密码
+db.system.users.find().pretty()
+
 
 ### 查看/创建 删除 数据库 
 show dbs
@@ -579,6 +605,13 @@ npm install 下载包，等待完成
 然后 访问 http://localhost:1234/
 创建连接
 mongodb://localhost/
+
+
+
+
+
+
+
 
 
 

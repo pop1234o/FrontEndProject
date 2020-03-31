@@ -221,5 +221,28 @@ req.session//就是请求带过来cookie中sessionId对应的session对象，每
 
 {{session.userInfo}}
 
+### 图片选择预览功能
+js读取本地图片，展示到 img上
+### 文章插入
+
+### 文章列表展示
+连表查询user,关联查询
+
+### 模板中时间格式化
+template.defaults.imports.dateFormat = dateformat;
+
+### 文章列表的分页展示
+第三方模块-mongoose-sex-page 
+自动帮我们计算好页码，总页数，当前页数据
+
+### mongdb账号
+默认不用账号
+创建完账号
+mongodb://user:pwd@localhost:27017/datebase
+
+
+
+
+
 
 
