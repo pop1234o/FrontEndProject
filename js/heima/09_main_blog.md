@@ -241,6 +241,42 @@ template.defaults.imports.dateFormat = dateformat;
 mongodb://user:pwd@localhost:27017/datebase
 
 
+### 开发环境&生产环境
+设置一个系统环境变量
+node_env
+process.env获取系统环境变量
+process.env.node_env
+
+### 客户端请求信息打印到控制台
+第三方模块-morgan 是一个中间件
+打印请求信息，响应时长
+
+### config 模块
+第三方模块-config
+把配置信息都写到文件中
+这样就不用在代码中对 环境 做判断了
+比如数据连接，生产和测试环境不一样
+
+process.env.NODE_ENV 来判断 development production
+
+下载，建立config目录，里面创建三个json ，
+
+### 敏感信息脱离工程
+比如数据库 链接，密码
+
+
+## 首页！！！
+
+文章简介
+替换html <> 中不包括>的内容  g是替换所有的
+{{@$value.content.replace(/<[^>]+>/g, '').substr(0, 90) + '...'}}
+@是原文输出  &nbsp; 会输出空格
+
+### 文章详情页
+
+### 评论文章
+root权限跳转后台，普通用户跳转用户首页
+后台用户访问鉴权，不同用户一律不让访问后台路由
 
 
 
