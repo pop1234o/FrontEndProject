@@ -216,7 +216,8 @@ bodyparser不支持文件上传 enctype="multipart/form-data"
 ### 让所有art中访问登录用户自己的session
 https://segmentfault.com/q/1010000003993234（如何在Express.js 4.* 的大量模板中访问req.session？）
 在所有路由之前加拦截器
-res.app.locals.session = req.session;
+//注意这里不是 res.app.locals app是全局的， res是本次请求的
+res.locals.session = req.session;
 req.session//就是请求带过来cookie中sessionId对应的session对象，每个用户都不一样
 
 {{session.userInfo}}
@@ -278,7 +279,27 @@ process.env.NODE_ENV 来判断 development production
 root权限跳转后台，普通用户跳转用户首页
 后台用户访问鉴权，不同用户一律不让访问后台路由
 
+根据session来判断登录状态
 
+### 退出登录
+req.session.destroy(() => {
+        //这样就把客户端 connect.sid清空了，然后客户端重新请求/pop/login
+        //然后返回页面的时候回把新生成的 connect.sid 返回去
+        res.clearCookie('connect.sid');
+        res.redirect('/pop/login');
+    });
+* 这个要写到最前面，要不就会被登录后台拦截器拦截了（因为普通用户不能访问后台）
+
+不主动设置session
+cookie默认是浏览器关闭就删除
+
+
+### res.locals app.locals 区别
+生命周期不同，res.locals是本次响应，app.locals是服务器生命周期
+
+
+### 评论文章和展示评论
+yyyy-mm-dd HH:MM:ss H-24小时 h-12小时
 
 
 
