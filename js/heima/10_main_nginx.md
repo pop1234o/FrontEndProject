@@ -158,8 +158,12 @@ mkdir /var/temp/nginx/client -p
 #### 启动
 cd /usr/local/nginx/sbin
 ./nginx
+
+
 ps aux|grep nginx
 
+netstat -nap|grep 80 
+tcp        0      0 0.0.0.0:80    0.0.0.0:*      LISTEN      31080/nginx: master 
 端口号默认80
 
 停止 
@@ -207,17 +211,42 @@ server{
     error_page
 }
 
+#### Nginx域名匹配规则
+https://blog.csdn.net/daiyudong2020/article/details/73863437 （nginx server_name匹配规则）
+1）完全匹配，匹配成功则终止搜索
+2）不匹配，默认走第1个server
+
+http://xx.com 和 http://www.xx.com是两个
+
+所以我们最好在阿里云上把 xx.com重定向到 www.xx.com
+nginx上匹配规则都走 www.xx.com 有利于seo优化
+
+#### 带www的域名和不带有什么区别
+https://www.cloudxns.net/Support/detail/id/918.html （带www和不带www域名有什么区别呢?）
+https://zhuanlan.zhihu.com/p/46559251 （www.和不带www.的域名有什么区别？）
+ 带www的严格来说是属于二级域名，不带www的属于一级域名
+
+其实www.和不带www.的域名可以是完全两个不同的网站，我们在做域名解析时可以将他们指向完全不同的两个IP或者网站。
+
+www一般指的是一个主机的名称（服务的名称）
+api.xx.com
+www.xx.com
+是两个不同的服务，是两个ip，两个项目
+如果 xx.com 指向ip，而www.xx.com没有，则www.xx.com就不能找到网页
 
 ## 反向代理 和 负载均衡
 
-### 配置被代理服务器的ip
+### 配置被代理服务器的ip upstream
+https://nginx.org/en/docs/http/ngx_http_upstream_module.html ()
+
+
 upstream server_name{
     server ip:port; # 可以是127.0.0.1
 }
 
 server{
     listen 80;
-    server_name 域名;# 
+    server_name 你的域名;# 
 
     location /{ 
         #root html 注释掉
