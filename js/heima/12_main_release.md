@@ -35,12 +35,91 @@ iTerm2。加强版命令行。
 ssh root@xx.com
 
 ### 安装nginx
+yum install nginx
 
 ### 修改之前的tomcat监听8080
+修改server.xml 重启
+
+### royal ts使用
+https://www.royalapps.com/ts/mac/download 下载
+https://www.jianshu.com/p/c053b81f6633 （在Mac上使用Royal TSX，代替Putty，创建科学服务器）
+下载，安装插件（terminal 和 file transfer），创建terminal ，配置私钥目录，连接
+
+为什么用这个，不用terminal
+帮你管理各种连接
+Powerful Connection Management
+Using RDP, VNC, SSH based terminals, S/FTP or web-based interfaces?
+No worries, Royal TSX got you covered!
+
+可以sftp 22端口，
+
+可以配置连接认证方式 credential 里，用户名密码，或者私钥认证
 
 ### 安装node
+https://juejin.im/post/5d75af70e51d4561db5e3ac4 (centos7 之 yum 安装nodejs)
+执行安装脚本
+curl --silent --location https://rpm.nodesource.com/setup_10.x | bash -
+--silent 不输入内容
+--loaction 支持重定向
+下载 url的内容，
+(里面自动为你配置了一些安装的操作步骤，面的你自己配置了，比如在/etc/yum.repos.d/里创建了yum源的文件nodesource-el7.repo，所以你下面才能执行 命令)
+
+然后执行
+sudo yum install -y nodejs
+
+node -v 查看是否安装成功
+
+find / -name node 查看node安装位置 在usr/bin/node
+
 
 ### 安装mongodb
+官方安装教程
+https://docs.mongodb.com/manual/tutorial/install-mongodb-on-red-hat/ (Install MongoDB Community Edition on Red Hat or CentOS)
+https://juejin.im/post/5cbe73f86fb9a0320b40d687 （Linux Centos 7安装MongoDB（简单！详细！）
+
+1.创建yum源 /etc/yum.repos.d/mongodb-org-4.2.repo
+[mongodb-org-4.2]
+name=MongoDB Repository
+baseurl=https://repo.mongodb.org/yum/redhat/$releasever/mongodb-org/4.2/x86_64/
+gpgcheck=1
+enabled=1
+gpgkey=https://www.mongodb.org/static/pgp/server-4.2.asc
+
+* 这里要到官网复制最新的，否则旧版本可能报错
+
+2.执行安装
+sudo yum install -y mongodb-org //这种都是安装最新版本
+或者单独选择版本
+sudo yum install -y mongodb-org-4.2.5 mongodb-org-server-4.2.5 mongodb-org-shell-4.2.5 mongodb-org-mongos-4.2.5 mongodb-org-tools-4.2.5
+
+//默认目录
+/var/lib/mongo (the data directory)
+/var/log/mongodb (the log directory)
+
+验证安装，会展示安装的rpm包 包含 mongodb名称的rpm包
+rpm -qa |grep mongodb
+mongodb-org-server-4.2.5-1.el7.x86_64
+mongodb-org-tools-4.2.5-1.el7.x86_64
+mongodb-org-4.2.5-1.el7.x86_64
+mongodb-org-mongos-4.2.5-1.el7.x86_64
+mongodb-org-shell-4.2.5-1.el7.x86_64
+
+
+rpm -ql mongodb-org-server
+/etc/mongod.conf
+/lib/systemd/system/mongod.service
+/usr/bin/mongod
+/usr/share/doc/mongodb-org-server-4.2.5
+/usr/share/doc/mongodb-org-server-4.2.5/LICENSE-Community.txt
+/usr/share/doc/mongodb-org-server-4.2.5/MPL-2
+/usr/share/doc/mongodb-org-server-4.2.5/README
+/usr/share/doc/mongodb-org-server-4.2.5/THIRD-PARTY-NOTICES
+/usr/share/man/man1/mongod.1
+/var/lib/mongo
+/var/log/mongodb
+/var/log/mongodb/mongod.log
+/var/run/mongodb
+
 
 
 
@@ -49,8 +128,9 @@ ssh root@xx.com
 ### nginx做反向代理
 不用域名访问不同服务
 
+### 文章维护
 
-### 7.seo
+### seo
 
 
 

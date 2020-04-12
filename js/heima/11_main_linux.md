@@ -338,6 +338,38 @@ rpm -ql zlib
 /usr/share/doc/zlib-1.2.7/FAQ
 /usr/share/doc/zlib-1.2.7/README
 
+#### yum命令
+// 1 安装 
+yum install package  // 安装指定的安装包package 
+
+// 2 更新和升级 
+yum update  // 全部更新 
+yum update package  // 更新指定程序包package
+yum check-update  // 检查可更新的程序 
+yum upgrade package  // 升级指定程序包package 
+
+// 3 查找和显示 
+yum info // 列出所有可以安装或更新的包的信息
+yum info package //显示安装包信息package 
+yum list // 显示所有已经安装和可以安装的程序包 
+yum list package  // 显示指定程序包安装情况package
+yum search package // 搜索匹配特定字符的package的详细信息
+
+// 4 删除程序 
+yum remove | erase package  // 删除程序包package
+yum deplist package  // 查看程序package依赖情况
+
+// 5 清除缓存 
+yum clean packages  // 清除缓存目录下的软件包 
+yum clean headers // 清除缓存目录下的 headers 
+yum clean oldheaders // 清除缓存目录下旧的 headers 
+yum clean, yum clean all  // (= yum clean packages; yum clean oldheaders) 清除缓存目录下的软件包及旧的headers
+
+作者：稻草叔叔
+链接：https://juejin.im/post/5cbe73f86fb9a0320b40d687
+来源：掘金
+著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
+
 
 
 ### 查看端口号占用
@@ -347,6 +379,43 @@ netstat -nap|grep 8080
 -n 拒绝显示别名，能显示数字的全部转化为数字
 -l 仅列出在Listen(监听)的服务状态
 -p 显示建立相关链接的程序名
+
+
+### curl命令
+下载http 内容
+curl http://www.linux.com 下载html内容输出到屏幕上
+curl http://www.linux.com >> linux.html 保存内容
+
+查看参数 crul --help
+查找参数 crul --help|grep --location
+
+
+
+### shell 和 bash
+https://www.jianshu.com/p/a702a01db5c7 (什么是shell和bash?)
+https://blog.csdn.net/wenlifu71022/article/details/4069929 (什么是shell? bash和shell有什么关系？（转）)
+真正能够控制计算机硬件（CPU、内存、显示器等）的只有操作系统内核（Kernel），
+图形界面和命令行只是架设在用户和内核之间的一座桥梁。
+#### 什么是shell
+shell是你（用户）和Linux（或者更准确的说，是你和Linux内核）之间的接口程序。你在提示符下输入的每个命令都由shell先解释然后传给Linux内核。
+shell 是一个命令语言解释器（command-language interpreter）。拥有自己内建的 shell 命令集。此外，shell也能被系统中其他有效的Linux 实用程序和应用程序（utilities and application programs）所调用。
+
+在Linux下，这个命令行程序叫做 Shell，shell是一个抽象的概念，是用户和操作系统的桥梁
+shell也是一个程序，有很多种shell（或者叫shell解释器）
+我们常说有多少种Shell,其实说的是Shell脚本解释器
+
+在Linux 和 UNIX系统里可以使用多种不同的shell可以使用。最常用的几种是 Bourne shell (sh), C shell (csh), 和 Korn shell (ksh)。
+
+#### 什么是bash
+linux默认的shell叫bash  Bourne Again shell (bash),
+
+#### 执行bash
+https://www.jianshu.com/p/ba6efda13e23 (bash运行脚本的几种方式)
+
+bash xxx
+sh xxx
+
+
 
 
 
