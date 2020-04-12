@@ -127,11 +127,20 @@ cat bb.txt >> aa.txt
 任何输出都可以写入
 ifconfig > aa.txt
 
-### 查看进程 杀掉进程
+### ps命令 查看进程 杀掉进程
 ps -ef 
 输出进程信息 并搜索 java内容的 展示
 ps -ef | grep java
 
+ps -aux | grep mongod 
+
+java mongod名称就是usr/bin中 二进制文件的名称
+
+-a all with tty, except session leaders
+-u, U, --user <UID>  effective user id or name
+x    processes without controlling ttys
+-e               all processes
+-f                   full-format, including command lines
 
 杀掉进程
 kill -9 [进程id]
@@ -338,6 +347,15 @@ rpm -ql zlib
 /usr/share/doc/zlib-1.2.7/FAQ
 /usr/share/doc/zlib-1.2.7/README
 
+#### rpm命令
+查找已经安装的包
+rpm -qa|grep 包名 
+rpm -qa |grep mongodb  // query --all
+
+查找已经安装的包的文件的位置，包括二进制文件位置，日志位置，文档位置，配置文件的位置
+rpm -ql 包名  //ql -query list 
+rpm -ql mongodb-org-server //上面查出来的包名
+
 #### yum命令
 // 1 安装 
 yum install package  // 安装指定的安装包package 
@@ -372,13 +390,15 @@ yum clean, yum clean all  // (= yum clean packages; yum clean oldheaders) 清除
 
 
 
-### 查看端口号占用
+### netstat命令 查看端口号占用
 netstat -nap|grep 8080
 -t (tcp) 仅显示tcp相关选项
 -u (udp)仅显示udp相关选项
 -n 拒绝显示别名，能显示数字的全部转化为数字
 -l 仅列出在Listen(监听)的服务状态
--p 显示建立相关链接的程序名
+-p 显示建立相关链接的程序名 比如java mongod 
+
+netstat -natp | grep 27017
 
 
 ### curl命令

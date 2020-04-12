@@ -120,7 +120,51 @@ rpm -ql mongodb-org-server
 /var/log/mongodb/mongod.log
 /var/run/mongodb
 
+#### 启动 停止mongo服务
+systemctl start mongod.service
+sudo service mongod start  或者 systemctl start mongod.service  # 开启MongoDB
+{ 对应执行文件位置
+    /lib/systemd/system/mongod.service
+    /usr/bin/mongod
+}
 
+netstat -natp | grep 27017 # MongoDB默认端口是27017，查看是否开启
+ps -aux | grep mongod    # 查看数据库的进程是否存在
+
+mongo 链接数据库
+
+
+sudo chkconfig mongod on  # 加入开机启动
+sudo service mongod restart # 重启MongoDB
+// 2、关闭MongoDB
+sudo service mongod stop  # 关闭防火墙
+
+// 3、卸载MongoDB
+sudo yum erase $(rpm -qa | grep mongodb-org)    # 卸载MongoDB
+sudo rm -r /var/log/mongodb  # 删除日志文件
+sudo rm -r /var/lib/mongo    # 删除数据文件
+
+#### mongodb远程链接配置
+1.
+vi /etc/mongod.conf
+
+network interfaces
+net:
+  port: 27017
+  bindIp: 0.0.0.0  # Enter 0.0.0.0,:: to bind to all IPv4 and IPv6 addresses or, alternatively, use the net.bindIpAll setting.
+修改绑定ip默认127.0.0.1只允许本地连接， 所以修改为bindIp:0.0.0.0, 退出保存
+
+2.sudo service mongod restart
+
+3 开放对外端口
+systemctl status firewalld  # 查看防火墙状态
+firewall-cmd --zone=public --add-port=27017/tcp --permanent # mongodb默认端口号
+firewall-cmd --reload  # 重新加载防火墙
+
+firewall-cmd --zone=public --query-port=27017/tcp # 查看端口号是否开放成功，输出yes开放成功，no则失败
+
+4远程链接
+mongo xx.xx.xx.xx:27017
 
 
 ### 上传项目，启动，监听 8081
