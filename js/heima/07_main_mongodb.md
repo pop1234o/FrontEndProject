@@ -553,6 +553,75 @@ sudo mongo --auth
 mongodb://user:pwd@localhost:27017/datebase
 
 * 管理员和子账号重名了，链接某个数据库，密码得用那个数据库的账户
+
+
+//为这个数据库创建用户
+https://docs.mongodb.com/manual/tutorial/enable-authentication/ （创建管理员）
+https://docs.mongodb.com/manual/tutorial/manage-users-and-roles/ (官方文档)
+默认mongod启动的数据库不需要权限就能用 mongo链接上
+
+1.创建超级管理员
+use admin
+db.createUser({user: "p",pwd: "a",roles: [ { role: "userAdminAnyDatabase", db: "admin" }, "readWriteAnyDatabase" ]})
+//权限详见 res/mongodb_roles.jpg
+
+2.重启服务
+db.adminCommand( { shutdown: 1 } )
+
+
+
+//如果没有 dbpath 要创建对应目录 默认是 /data/db
+netstat -natp | grep 27017
+
+
+mongod --auth --port 27017 --dbpath /var/lib/mongodb 
+./bin/mongod -f mongodb.conf  
+但是这两种方式都是在前台启动Mongodb进程，如果Session窗口关闭，Mongodb进程也随之停止。不过Mongodb同时还提供了一种后台Daemon方式启动，只需要加上一个"--fork"参数即可，值得注意的是，用到了"--fork"参数就必须启用"--logpath"参数
+
+
+mongod --auth --port 27017 --dbpath /var/lib/mongodb --fork --logpath /var/lib/mongodb/mongodb.log
+
+--fork  必须有logpath ，代替控制台的输出
+--logpath arg                         Log file to send write to instead of
+                                        stdout - has to be a file, not
+                                        directory
+
+ --auth                                Run with security
+
+这样就能异步启动 mongodb服务了
+* mongod -help 还是得看文档啊！！！
+
+连接数据库（Authenticate after Connection）
+mongo --port 27017
+但是这时你没有权限，什么都干不了 show dbs什么都没有
+use admin
+db.auth("myUserAdmin", passwordPrompt()) // or cleartext password
+
+
+
+
+
+### 忘记管理员密码
+https://blog.csdn.net/asdfsadfasdfsa/article/details/65437422 (mongodb忘记admin密码操作)
+关闭服务
+mongod  --shutdown --dbpath /var/lib/mongodb //必须指定dbpath
+
+mongod  --port 27017 --dbpath /var/lib/mongodb --fork --logpath /var/lib/mongodb/mongodb.log
+
+use admin???
+db.system.users.find()//
+db.system.users.remove({})
+创建新的管理员帐号
+
+4.关闭mongo
+use admin
+db.shutdownServer()
+
+5.以auth方式启动mongo
+mongod --auth --dbpath /usr/local/mongodb/data/ --logpath /usr/local/mongodb/logs/mongod.log -logappend --fork
+
+
+ 
 ### 查看所有数据库账号
 sudo mongo 链接数据库
 use admin
@@ -561,9 +630,10 @@ db.system.users.find().pretty()
 
 
 ### 查看/创建 删除 数据库 
-show dbs
-显示当前数据库对象或集合
-db 
+show dbs //显示当前所有数据库
+
+db  //显示当前数据库
+
 运行"use"命令，可以连接到一个指定的数据库。
 use test
 果数据库不存在，则创建数据库，否则切换到指定数据库。
@@ -571,6 +641,7 @@ use DATABASE_NAME
 * 必须数据库里有数据用 show才能展示
 删除-选中数据库
 db.dropDatabase()
+
 
 ### 创建 查询 表/集合
 查询

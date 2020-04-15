@@ -166,6 +166,9 @@ firewall-cmd --zone=public --query-port=27017/tcp # 查看端口号是否开放�
 4远程链接
 mongo xx.xx.xx.xx:27017
 
+创建对应数据库，创建对应用户（mongo的用户跟着数据库走）
+
+### 安装数据库访问服务
 
 ### 上传项目，启动，监听 8081
 
