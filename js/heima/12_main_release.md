@@ -172,7 +172,27 @@ mongo xx.xx.xx.xx:27017
 
 ### 安装数据库访问服务
 
+
+
+
 ### 上传项目，启动，监听 8081
+安装git 
+yum install git
+
+拉取代码
+切换nrm
+
+npm install
+
+node app.js
+但是这样会阻塞控制台
+
+### 后台执行node
+一、nohup node ***.js &
+node.js自带服务nohub，不需要安装别的包。
+缺点：存在无法查询日志等问题
+
+
 
 ### nginx做反向代理
 不用域名访问不同服务

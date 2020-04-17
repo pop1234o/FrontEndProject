@@ -505,6 +505,54 @@ https://hsk.oray.com/news/5928.html（分辨IP是公网IP还是内网IP的方法
 
 
 
+### 后台执行node
+
+https://www.cnblogs.com/zhoujie/p/nodejs4.html（nodejs高大上的部署方式-PM2）
+
+supervisor感觉只是拿来用作开发环境的。再网上找到pm2.目前似乎最常见的线上部署nodejs项目的有forever,pm2这两种。
+
+1.
+nohup node /home/zhoujie/ops/app.js &
+原程序的的标准输出被自动改向到当前目录下的nohup.out文件，起到了log的作用
+nohup就是不挂起的意思( no hang up)。
+
+
+2.pm2 
+https://pm2.keymetrics.io/docs/usage/quick-start/ （使用教程）
+
+npm install -g pm2
+pm2 start app.js
+pm2 list //查看启动的所有程序的状态，内存，cpu，名称等等
+
+pm2 restart app_name
+$ pm2 reload app_name
+$ pm2 stop app_name
+$ pm2 delete app_name
+app_name还可以是：
+all to act on all processes
+id to act on a specific process id
+
+#### pm2查看日志
+https://blog.csdn.net/kane_canpower/article/details/53510239 （pm2 常用命令）
+pm2 logs 
+pm2 flush          冲掉                 #Empty all log file
+pm2 reloadLogs                      #Reload all logs
+
+错误日志和打印日志是分开存放的，默认存放位置
+/root/.pm2/logs/app-error.log last 15 lines:
+/root/.pm2/logs/app-out.log last 15 lines:
+
+
+
+https://www.npmjs.com/package/pm2-web ，pm2 的web界面模块，比pm2本身的美观很多，还能管理
+
+其实pm2 和forever一样有watch功能，对于自动部署还是很有用的功能
+
+
+pm2远程部署
+https://pm2.keymetrics.io/docs/usage/deployment/
+连接远程服务器，自动拉取代码，npm install 等等操作
+
 
 
 

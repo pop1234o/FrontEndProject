@@ -170,12 +170,26 @@ mongoimport 在mdb 的bin中
 把json文件 导入到数据库中
 
 ### 查询数据（文档）
+https://mongoosejs.com/docs/queries.html
+
+如果找到返回数据不为null，如果没找到或者报错，err不为null
 //找出所有文档 （数据）
 Course.find() //返回promise
     .then(doc=>{
         //返回一个json数组,里面都是一条条(文档)数据
     })
     .catch(erro=>{})
+
+#### 注意 Queries are Not Promises
+正确写法
+// find each person with a last name matching 'Ghost', selecting the `name` and `occupation` fields
+Person.findOne({ 'name.last': 'Ghost' }, 'name occupation', function (err, person) {
+  if (err) return handleError(err);
+  // Prints "Space Ghost is a talk show host".
+  console.log('%s %s is a %s.', person.name.first, person.name.last,
+    person.occupation);
+});
+
 
 
 //条件查询
@@ -594,10 +608,22 @@ mongod --auth --port 27017 --dbpath /var/lib/mongodb --fork --logpath /var/lib/m
 连接数据库（Authenticate after Connection）
 mongo --port 27017
 但是这时你没有权限，什么都干不了 show dbs什么都没有
-use admin
+use admin //必须得有
 db.auth("myUserAdmin", passwordPrompt()) // or cleartext password
 
 
+### 创建对应数据库的用户
+use test
+db.createUser({user: "pop",pwd:  passwordPrompt(),roles: [ { role: "readWrite", db: "test" }]})
+
+重新连接
+mongo --port 27017
+db.auth("myTester", passwordPrompt())  // or cleartext password
+
+或者
+mongo --port 27017 -u "myTester" --authenticationDatabase "test" -p
+
+这样他只能对 test这个数据库进行操作
 
 
 

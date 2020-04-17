@@ -391,6 +391,8 @@ yum clean, yum clean all  // (= yum clean packages; yum clean oldheaders) 清除
 
 
 ### netstat命令 查看端口号占用
+show network status
+
 netstat -nap|grep 8080
 -t (tcp) 仅显示tcp相关选项
 -u (udp)仅显示udp相关选项
@@ -398,8 +400,16 @@ netstat -nap|grep 8080
 -l 仅列出在Listen(监听)的服务状态
 -p 显示建立相关链接的程序名 比如java mongod 
 
+
+-a    With the default display, show the state of all sockets
+-p protocol
+           Show statistics about protocol, which is either a well-known name for a protocol or an alias
+           for it.
+-n    Show network addresses as numbers
+
 netstat -natp | grep 27017
 
+netstat -nap | grep 27017
 
 ### curl命令
 下载http 内容
