@@ -205,12 +205,41 @@ enctype="multipart/form-data"
 默认是 application/x-www-from-urlencoded 
 key=value&&key=value
 
-### 解析图片上传参数
+### 解析图片上传参数 第三方模块-formidable
 bodyparser不支持文件上传 enctype="multipart/form-data"
 得用第三方模块-formidable
 
+空文件
+ //{"cover":{"size":0,"path":"/Users/xx/Documents/xxx/xx/public/uploads/upload_264a1979c531ee1e299064a7a9b9ae3e","name":"","type":"application/octet-stream","mtime":null}}
 
-{"cover":{"size":6222583,"path":"/Users/liyafeng/Documents/xx/public/uploads/upload_8f9099dc70de575d5674e18e3b570291.pptx","name":"xx.pptx","type":"application/vnd.openxmlformats-officedocument.presentationml.presentation","mtime":"2020-03-30T15:42:35.506Z"}}
+{"cover":{"size":6222583,"path":"/Users/xx/Documents/xx/public/uploads/upload_8f9099dc70de575d5674e18e3b570291.pptx","name":"xx.pptx","type":"application/vnd.openxmlformats-officedocument.presentationml.presentation","mtime":"2020-03-30T15:42:35.506Z"}}
+
+
+//这种body是和上面不一样 
+        // Content-Type: multipart/form-data; boundary=----WebKitFormBoundaryK0UJYi7pQjhsVAvz
+
+        //  ------WebKitFormBoundaryK0UJYi7pQjhsVAvz
+        // Content-Disposition: form-data; name="cover"; filename=""
+        // Content-Type: application/octet-stream
+
+        // ------WebKitFormBoundaryK0UJYi7pQjhsVAvz
+        // Content-Disposition: form-data; name="content"
+        // <p>bbb</p>
+        // ------WebKitFormBoundaryK0UJYi7pQjhsVAvz--
+
+默认是这样
+ // Content-Type: application/x-www-form-urlencoded
+//username=pop&email=241973
+
+这个时候就不能用bodyparser了， req.body是空对象
+
+#### 上传空文件问题
+有这个字段，但是内容为空，但是也会生成一个空文件
+判断size==0 ，否则删除
+fs.unlink('path/file.txt', (err) => {
+  if (err) throw err;
+  console.log('文件已删除');
+});
 
 
 ### 让所有art中访问登录用户自己的session

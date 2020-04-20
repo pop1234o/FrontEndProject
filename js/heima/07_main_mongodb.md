@@ -8,7 +8,7 @@ https://www.mongodb.com/
 下载
 https://www.mongodb.com/download-center/community
 
-https://www.mongodb.com/zh(中文)
+https://www.mongodb.com/zh (中文)
 
 下载compass-是MongoDB gui界面
 也可以在安装mongodb的时候联网下载
@@ -366,7 +366,9 @@ model 目录 数据库操作
 这样代码就很乱，可以用模板引擎
 
 ### 模板引擎 art-template
-art-template(腾讯出品)
+https://aui.github.io/art-template/zh-cn/index.html （官网）
+
+art-template(腾讯出品) 高性能 JavaScript 模板引擎
 第三方模块，不是node自带的模块
 npm install art-template
 const template = require('art-template');
@@ -381,6 +383,7 @@ data是json对象（就是数据）
 * art文件就是一种动态的html，解析引擎会把art转换成html
 
 #### 两种模板语法
+https://aui.github.io/art-template/zh-cn/docs/ （语法文档）
 原始语法就是 <%%>中写js代码
 
 1.输出
@@ -613,7 +616,7 @@ db.auth("myUserAdmin", passwordPrompt()) // or cleartext password
 
 
 ### 创建对应数据库的用户
-use test
+use test  //!!注意，这里必须切换到 对应的数据库，才能创建对应数据库的用户，否则在admin中执行无效
 db.createUser({user: "pop",pwd:  passwordPrompt(),roles: [ { role: "readWrite", db: "test" }]})
 
 重新连接
@@ -634,10 +637,13 @@ mongod  --shutdown --dbpath /var/lib/mongodb //必须指定dbpath
 
 mongod  --port 27017 --dbpath /var/lib/mongodb --fork --logpath /var/lib/mongodb/mongodb.log
 
-use admin???
+use admin //需要切换到admin数据库才能看到，这个是用户管理的数据库
 db.system.users.find()//
 db.system.users.remove({})
+或者
+db.system.users.remove({_id:"blog.p"})
 创建新的管理员帐号
+
 
 4.关闭mongo
 use admin
@@ -683,6 +689,17 @@ db.COLLECTION_NAME.insert(documentJson)
 查询数据
 db.COLLECTION_NAME.find()
 
+### 更新文档
+https://docs.mongodb.com/manual/tutorial/update-documents/
+db.inventory.updateOne(
+   { item: "paper" },
+   {
+     $set: { "size.uom": "cm", status: "P" },
+     $currentDate: { lastModified: true }
+   }
+)
+
+db.article.updateOne({'_id':ObjectId("5e99bf411ac98f49a4bc6a6e")},{$set:{'cover':null}});
 
 =====================
 =====可视化管理后台===
