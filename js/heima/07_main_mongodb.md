@@ -2,6 +2,7 @@
 mongodb api采用js语法，所以用它
 
 https://www.runoob.com/mongodb/mongodb-tutorial.html （菜鸟教程）
+http://www.mongoosejs.net/docs/guide.html (中文文档)
 ### 安装
 （奇数是开发版本，偶数是稳定版本）
 https://www.mongodb.com/
@@ -129,7 +130,9 @@ Course.create({name:'aa',isMan:true}) //返回promise对象
 * 到此数据库被创建，里面有表，有数据
 多了 _id是数据库帮我们生成的
 #### field数据类型
-就是json中规定的类型，可以是 String Number
+http://www.mongoosejs.net/docs/schematypes.html
+
+就是json中规定的类型，可以是 String Number Date
 {
     name:String,
     isMan :Boolean,
@@ -144,6 +147,25 @@ Course.create({name:'aa',isMan:true}) //返回promise对象
         type:String
     }
 }
+
+const Comment = new Schema({
+  name: { type: String, default: 'hahaha' },
+  age: { type: Number, min: 18, index: true },
+  bio: { type: String, match: /[a-z]/ },
+  date: { type: Date, default: Date.now },
+  buff: Buffer
+});
+
+Schema Types内置类型如下：
+
+String
+Number
+Boolean | Bool
+Array
+Buffer
+Date
+ObjectId | Oid
+Mixed
 
 #### 另一种插入方式
 //创建集合实例（一条数据）

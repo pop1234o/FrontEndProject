@@ -392,6 +392,8 @@ ui给你750的设计图，那么1份就是75px
 bootstrap  来自twitter
 基于html css js
 bottstrap.css88.com(非官方)
+https://v3.bootcss.com/getting-started/ 
+
 里面有很多现成的样式，而且是响应式的
 最稳定 3.x.x版本
 
@@ -414,6 +416,8 @@ bottstrap.css88.com(非官方)
 不同屏幕，.container宽度不同
 
 ### 栅格系统
+https://v3.bootcss.com/css/#grid 
+https://v3.bootcss.com/examples/grid/ (示例)
 grid systems
 把容器分为12列，有点像rem，rem是整个屏幕划分
 现有行，再有列
@@ -429,6 +433,15 @@ lg-large
 md-medium
 sm-small
 xs- extra small超小
+
+/* 超小屏幕（手机，小于 768px） */
+/* 没有任何媒体查询相关的代码，因为这在 Bootstrap 中是默认的（还记得 Bootstrap 是移动设备优先的吗？） */
+/* 小屏幕（平板，大于等于 768px） */
+@media (min-width: @screen-sm-min) { ... }
+/* 中等屏幕（桌面显示器，大于等于 992px） */
+@media (min-width: @screen-md-min) { ... }
+/* 大屏幕（大桌面显示器，大于等于 1200px） */
+@media (min-width: @screen-lg-min) { ... }
 
 ### 嵌套
 里面嵌套的也加上 col就行
@@ -452,7 +465,10 @@ xs- extra small超小
 TODO
 
 
-
-
+====================
+========other=======
+====================
+.container 宽度固定，不同尺寸下有固定的宽度
+container-fluid 这个宽度就是100% （这个和瀑布流没关系）
 
 
