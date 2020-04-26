@@ -471,4 +471,25 @@ TODO
 .container 宽度固定，不同尺寸下有固定的宽度
 container-fluid 这个宽度就是100% （这个和瀑布流没关系）
 
+### bootstrap
+设置高度
+在 col-xx  里面放div   
+height: 0px;
+padding-bottom: 33%; 100%让·高度是盒子高度， 
+
+
+### vscode 格式化art
+https://blog.csdn.net/xiaoyao9524/article/details/88832949 
+commond shift p 
+找到"Open Settings (JSON)" 打开
+
+2、在对象最后添加一项：版
+"files.associations": {
+"*.art": "html"
+}
+3、Ctrl + S保存
+
+就像格式化html格式化art就行
+
+
 
