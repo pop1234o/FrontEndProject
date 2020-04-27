@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <script src="https://qz-front.oss-cn-beijing.aliyuncs.com/onlineJsBridge/MonkeyConnectWebViewBridgeSDK.js"></script>
+    <script src="https://qxxz-froxxnt.oss-cn-beixxjing.alixxyuncs.com/onlinexxJsBridge/MonkeyxxConnectWebViewBridgeSDK.js"></script>
 </head>
 
 <body>
@@ -16,19 +16,37 @@
     var isInit = false;
     document.getElementById("btn").onclick = function () {
         if (isInit) {
-            callMiniProgram();
+            // callMiniProgram();
+            registerBack();
         } else {
             window.MonkeyConnectWebViewBridgeSDK.initJsBridge(function () {
                 isInit = true;
-                callMiniProgram();
+                // callMiniProgram();
+                registerBack();
             });
         }
 
     }
 
+    window.MonkeyConnectWebViewBridgeSDK.initJsBridge(function () {
+                isInit = true;
+                // callMiniProgram();
+                registerBack();
+    });
+
+    function registerBack() {
+        window.WebViewJavascriptBridge.registerHandler("backAction", function (data, responseCallback) {
+            // document.getElementById("show").innerHTML = ("data from Java: = " + data);
+            // var responseData = "Javascript Says Right back aka!";
+            // responseCallback(responseData);
+            console.log('调用了backAction');
+            
+        });
+    }
+
     function callMiniProgram() {
         // 通过JsBridge调用原生方法，写法固定，第一个参数时方法名，第二个参数时传入参数，第三个参数时响应回调
-        var data = { programId: "gh_8837c113f8e2", path: "/pages/group", type: 0 };
+        var data = { programId: "gh_8837c113f8e2xx", path: "/pages/group", type: 0 };
         window.WebViewJavascriptBridge.callHandler('launchWeixinMiniProgram', data, function (response) {
 
         });
