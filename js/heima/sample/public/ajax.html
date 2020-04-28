@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <script src="./template-web.js"></script>
+
+</head>
+
+<body>
+    <h1>hello</h1>
+    <div id="container"></div>
+    <button onclick="getTemp()">填充模板</button>
+    <script>
+
+
+        ajax({
+            type: "GET",
+            url: "http://localhost:8080/jump.html",
+            onSuccess: function (status, data) {
+                console.log(status);
+                console.log(data);
+            },
+            onError: function () {
+
+            },
+            params: {
+                name: 'aaa',
+                age: 20
+            }
+
+        });
+
+
+        function ajax(options) {
+            var httpRequest = new XMLHttpRequest();
+            //只在响应返回的时候被调用一次
+            httpRequest.onload = function () {
+                if (options.onSuccess) {
+                    options.onSuccess(httpRequest.status, httpRequest.responseText);
+                }
+            };
+            httpRequest.onerror = function () {
+                if (options.onError) {
+                    options.onError();
+                }
+            };
+
+            var url = options.url;
+            var params;
+            if (options.params) {
+                for (var key in options.params) {
+                    if (object.hasOwnProperty(key)) {
+                        var value = object[key];
+                        params += key + "=" + value + "&";
+                    }
+                }
+                params = params.substring(0, params.length - 1);
+                if (options.type == 'GET') {
+                    url += url + "?" + params;
+                }
+            }
+
+            httpRequest.open(options.type, url, true);
+            if (params && options.type == 'POST') {
+                httpRequest.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+                httpRequest.send(params);//需要encode??
+            } else {
+                httpRequest.send();
+            }
+
+        }
+
+
+        function getTemp() {
+            var html = template('tpl-user', { user: { name: 'aaa' } });
+            document.getElementById("container").innerHTML = html;
+        }
+
+    </script>
+
+
+    <script id="tpl-user" type="text/html">
+    {{if user}}
+      <h2>{{user.name}}</h2>
+    {{/if}}
+    </script>
+</body>
+
+</html>
