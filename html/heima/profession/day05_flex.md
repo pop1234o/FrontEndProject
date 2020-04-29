@@ -492,4 +492,6 @@ commond shift p
 就像格式化html格式化art就行
 
 
+### webstrom 格式化art
+打开 preferences - editor - file types 然后选择 html 添加*.art
 

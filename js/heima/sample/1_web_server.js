@@ -16,7 +16,7 @@ http.createServer(function (req, resp) {
 }).listen(8080);
 
 function parseRequestAndResponse(req, resp) {
-    resp.writeHead(200, { 'Content-Type': 'text/html;charset=utf8' });
+    resp.writeHead(200, {'Content-Type': 'text/html;charset=utf8'});
 
     //解析成对象
     const urlObj = url.parse(req.url, true);
@@ -42,7 +42,7 @@ function parseRequestAndResponse(req, resp) {
 
 //路由功能
 function router(req, resp) {
-    resp.writeHead(200, { 'Content-Type': 'text/html;charset=utf8' });
+    resp.writeHead(200, {'Content-Type': 'text/html;charset=utf8'});
 
     //解析成对象
     const urlObj = url.parse(req.url, true);
@@ -56,6 +56,7 @@ function router(req, resp) {
     }
 
 }
+
 //访问静态资源
 function visitStatic(req, resp) {
 
@@ -71,10 +72,10 @@ function visitStatic(req, resp) {
     fs.readFile(realFilePath, (err, data) => {
         if (err == null) {
             let type = mime.getType(realFilePath);
-            resp.writeHead(200, { 'Content-Type': type + ';charset=utf8' });
+            resp.writeHead(200, {'Content-Type': type + ';charset=utf8'});
             resp.end(data);
         } else {
-            resp.writeHead(404, { 'Content-Type': 'text/html;charset=utf8' });
+            resp.writeHead(404, {'Content-Type': 'text/html;charset=utf8'});
             resp.end("<h2>sorry! resouce missing!</h2>");
         }
 

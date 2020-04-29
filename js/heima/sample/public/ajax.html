@@ -64,6 +64,7 @@
                 }
             }
 
+            // httpRequest.withCredentials =true;
             httpRequest.open(options.type, url, true);
             if (params && options.type == 'POST') {
                 httpRequest.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
