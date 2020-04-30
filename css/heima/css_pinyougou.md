@@ -23,6 +23,9 @@ xx.com/favicon.ico 就能访问图标
 
 www.bitbug.net 把png转换成ico
 
+你要加上没有展示出来，可能是有缓存导致的
+mac上 command+shift+r 强制刷新即可
+
 ##搜索引擎优化 seo
 三大标签：
 1.
