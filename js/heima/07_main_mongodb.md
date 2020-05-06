@@ -617,7 +617,8 @@ mongod --auth --port 27017 --dbpath /var/lib/mongodb
 ./bin/mongod -f mongodb.conf  
 但是这两种方式都是在前台启动Mongodb进程，如果Session窗口关闭，Mongodb进程也随之停止。不过Mongodb同时还提供了一种后台Daemon方式启动，只需要加上一个"--fork"参数即可，值得注意的是，用到了"--fork"参数就必须启用"--logpath"参数
 
-
+====后台启动mongodb
+后台启动必须指定 logpath ，以前是在控制台输出log，现在就必须指定log输出
 mongod --auth --port 27017 --dbpath /var/lib/mongodb --fork --logpath /var/lib/mongodb/mongodb.log
 
 --fork  必须有logpath ，代替控制台的输出
