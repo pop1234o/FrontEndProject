@@ -118,6 +118,19 @@ app.use(session({
 
 * 网站服务器重启，session消失
 
+saveUninitialized false就是
+强制将“未初始化”的会话保存到存储区
+ Choosing false is useful for implementing login sessions, reducing server storage usage
+
+如果是true每次请求如果未初始化，就初始化
+false，只有    req.session.view = 1; 赋值才初始化
+
+返回 响应头
+Set-Cookie: connect.sid=s%3ANVom56Elb6Mpl-fR8moJQSnAo8nH-w3t.aBxEkV3mcSEnzOa6ZIqgavKmiYt7qGPavUkOXWVzous; Path=/; Expires=Mon, 18 May 2020 16:09:31 GMT; HttpOnly
+
+
+  resave:
+Forces the session to be saved back to the session store, even if the session was never modified during the request
 
 ### session窃取
 https://cloud.tencent.com/developer/article/1043362 （基于Session的身份窃取）

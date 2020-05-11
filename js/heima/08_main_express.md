@@ -206,8 +206,26 @@ app.locals.user={
 
 
 
+====================
+========other=======
+====================
 
 
+### ejs使用
+npm install ejs
+
+// view engine setup
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'ejs');
+
+
+
+res.render('index', { title: 'Express' });
+
+index.ejs里
+<h1><%= title %></h1>
+
+先从public/index.html来找，然后再去views/index.ejs找
 
 
 
