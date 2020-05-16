@@ -115,6 +115,10 @@ Access-Control-Expose-Headers: X-Expire-In
 
 ### jq发送ajax
 
+https://api.jquery.com/jquery.ajax/ (官方)
+https://www.jianshu.com/p/7ad64f55be7b （示例）
+
+
 $.ajax();
 
 ### 获取表单参数
@@ -124,15 +128,37 @@ $('#from').serialize(); 自动把form中的参数拼接
 from.serializeArray(); 得到from表单中所有控件 name value的数组
 我们遍历一下就能拿到参数了
 
+### 添加自定义请求头
+
+https://stackmirror.com/questions/7686827 (How can I add a custom HTTP header to ajax request with js or jQuery?)
+
+$.ajax(
+                {
+                    url:'http://127.0.0.1:30080/api-a/quasiCustom/selectCustomList',
+                    type:'post',
+                    dateType:'json',
+                    beforeSend: function(xhr) {
+                        xhr.setRequestHeader("organId:'1333333333'");
+                    },
+                    headers:{'Content-Type':'application/json;charset=utf8','organId':'1333333333'},
+                    data:JSON.stringify(org),
+                    success:function(data){console.log("sucess");},
+                    error:function(data){console.log("error");}
+                }
+            );
+
+
+value不能是undefined，而且必须是字符串，否则不传输这个字段
 
 
 
 
-http://v5-dy.ixigua.com/06dd0a2671f12fb1e3921fc820662e64/5ea84450/video/tos/cn/tos-cn-ve-15/5b2850275833415ca5d130485932bb47/?a=1128&br=0&bt=2328&cr=0&cs=0&dr=0&ds=3&er=&l=202004282157080100140470852537EBE2&lr=aweme&qs=0&rc=M2h0OG06O3E7dDMzNGkzM0ApM2Y8NTg2PDxmNzY8ZWgzaWcvcTYvMmtpNTNfLS1gLS9zczUuYC81My5eXmAtYjQuY2M6Yw%3D%3D&vl=&vr=
 
 
-http://v5-dy.ixigua.com/e7a4fd38b88034c4827daa063e0db015/5ea84625/video/tos/cn/tos-cn-ve-15/df4be74cc8694139bd7d5fed454055a3/?a=1128&br=0&bt=2596&cr=0&cs=0&dr=0&ds=3&er=&l=202004282204570100120340510C3E7AAF&lr=&qs=0&rc=M2h0OG06O3E7dDMzNGkzM0ApOTszZGdkNjw5NzxkNjRnaGcvcTYvMmtpNTNfLS1gLS9zc2EyLi9iLmAuYDQ0NGA0NGE6Yw%3D%3D&vl=&vr=
 
 
-http://v5-dy.ixigua.com/b85abe2a8f46dbe40da911654370bfc0/5ea846ed/video/tos/cn/tos-cn-ve-15/5b2850275833415ca5d130485932bb47/?a=1128&br=0&bt=2328&cr=0&cs=0&dr=0&ds=3&er=&l=202004282208170100080612061544A4CA&lr=aweme&qs=0&rc=M2h0OG06O3E7dDMzNGkzM0ApM2Y8NTg2PDxmNzY8ZWgzaWcvcTYvMmtpNTNfLS1gLS9zczUuYC81My5eXmAtYjQuY2M6Yw%3D%3D&vl=&vr=
+
+
+
+
 

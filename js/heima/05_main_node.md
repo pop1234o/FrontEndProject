@@ -524,7 +524,7 @@ npm install -g pm2
 pm2 start app.js
 pm2 list //查看启动的所有程序的状态，内存，cpu，名称等等
 
-pm2 restart app_name
+$ pm2 restart app_name
 $ pm2 reload app_name
 $ pm2 stop app_name
 $ pm2 delete app_name
