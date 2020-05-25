@@ -621,6 +621,12 @@ mongod --auth --port 27017 --dbpath /var/lib/mongodb
 后台启动必须指定 logpath ，以前是在控制台输出log，现在就必须指定log输出
 mongod --auth --port 27017 --dbpath /var/lib/mongodb --fork --logpath /var/lib/mongodb/mongodb.log
 
+mac上
+sudo mongod --auth --port 27017 --fork --logpath /Users/xx/Documents/mongodb.log
+没有sudo会报错
+Attempted to create a lock file on a read-only directory: /data/db
+
+
 --fork  必须有logpath ，代替控制台的输出
 --logpath arg                         Log file to send write to instead of
                                         stdout - has to be a file, not

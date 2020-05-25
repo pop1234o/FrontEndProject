@@ -40,6 +40,9 @@ rmdir
 
 mkdirs aa/bb
 
+touch a.txt 创建新的文件
+
+
 #### 浏览文件
 cat  文件所有内容
 more 一次显示一瓶  回车和空格翻页 q退出 ctrl+c退出
@@ -410,6 +413,11 @@ netstat -nap|grep 8080
 netstat -natp | grep 27017
 
 netstat -nap | grep 27017
+
+### 查看内存和cpu占用情况
+top
+
+mysql 3306
 
 ### curl命令
 下载http 内容
