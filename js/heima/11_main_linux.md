@@ -419,6 +419,21 @@ top
 
 mysql 3306
 
+### linux杀掉进程
+
+kill -s 9 1827
+-s signal 信号
+
+其中-s 9 制定了传递给进程的信号是９，即强制、尽快终止进程。各个终止信号及其作用见附录。
+
+1827则是上面ps查到的火狐的PID。
+
+过滤出tomcat进程，其实就是过滤进程启动的 CMD
+ps -ef |grep tomcat
+有两个进程，杀掉即可
+
+
+
 ### curl命令
 下载http 内容
 curl http://www.linux.com 下载html内容输出到屏幕上
