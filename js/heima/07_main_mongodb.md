@@ -45,11 +45,19 @@ sudo mv mongodb-osx-x86_64-4.0.9/ mongodb
 添加环境变量
 export PATH=/usr/local/mongodb/bin:$PATH
 
+或者在.bash_profile里加入这一行，然后source一下这个文件
+source ~/.bash_profile
+
 (https://www.jianshu.com/p/55e3b3d6ca6b )
 ### 通过yum安装
 https://www.cnblogs.com/LongJiangXie/p/6080791.html （CentOS7使用阿里云镜像安装Mongodb）
 https://mirror.tuna.tsinghua.edu.cn/help/mongodb/ （清华-MongoDB 镜像使用帮助）
 https://developer.aliyun.com/mirror/mongodb?spm=a2c6h.13651102.0.0.3e221b11saxh58 （阿里云-MongoDB 镜像）
+
+
+brew - The missing package manager for macOS
+
+好像mac上没有yum 和apt-get 只有brew 
 
 ### 安装后添加数据目录
 这是默认目录
@@ -61,6 +69,9 @@ sudo mongod --dbpath=/data/db
 man mkdir可以查看文档
 如果不加 -p   /data: No such file or directory
 可以自动创建中间的文档
+
+### 然后需要给db添加用户
+否则你现有的工程链接不上
 
 ### mac 启动mongodb
 sudo mongod //必须加sudo用管理员权限，否则mongod无权访问 /data/db
@@ -752,8 +763,10 @@ mongodb://localhost/
 
 
 
-
-
+### 创建用户
+启动服务器，use admin 创建admin用户，然后退出
+然后mongo 链接，use admin ，db.auth('p','a') 登录，然后use test ，创建这个数据库的用户
+两个数据的用户名密码可以相同
 
 
 
