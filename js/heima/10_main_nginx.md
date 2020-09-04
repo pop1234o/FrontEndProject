@@ -171,6 +171,7 @@ tcp        0      0 0.0.0.0:80    0.0.0.0:*      LISTEN      31080/nginx: master
 ./nginx -s quit 保存配置后退出
 ./nginx -s reload 重新加载配置文件
 
+执行文件在你安装目录的 sbin目录下
 
 ### 静态资源部署
 放到 /usr/local/nginx/html （默认）
